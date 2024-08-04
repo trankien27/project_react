@@ -1,0 +1,151 @@
+body {
+  padding: 0px;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.navbar {
+  background-color: rgba(0, 0, 0, 0) !important;
+  z-index: 10;
+}
+
+
+
+.navbar-nav {
+  .nav-link {
+    &.active {
+      color: red !important;
+    }
+  }
+}
+
+.navbar-nav {
+  a {
+    color: black;
+    text-decoration: none;
+
+  }
+
+}
+
+.homepage-content {
+  button {
+    border: none;
+  }
+
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-login {
+  margin-top: 70px;
+
+}
+
+video {
+  position: fixed;
+  bottom: 0px;
+  width: 100vw;
+  height: 130vh;
+
+}
+
+.btn-login {
+  border-radius: 10px;
+  margin-right: 15px;
+  padding: 8px 16px;
+  border: 1px solid #535353;
+}
+
+.btn-signup {
+  border-radius: 10px;
+  margin-right: 15px;
+  padding: 8px 16px;
+  border: 1px solid #535353;
+  background-color: #303030;
+
+  a {
+    color: white;
+  }
+
+
+
+  &:hover {
+    background-color: black;
+  }
+}
+
+@media (min-width: 1400px) {
+
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1504px;
+  }
+}
+
+.app-container {
+  .header-container {
+    .navbar {
+      z-index: 10;
+      background-color: rgba(0, 0, 0, 0) !important;
+
+      .nav-link {
+        &active {
+          color: red;
+        }
+      }
+    }
+  }
+
+  .homepage-container {
+    .homepage-content {
+      width: 40vw;
+      padding: 100px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      .title-1 {
+        font-size: 40px;
+        font-weight: 700;
+      }
+
+      .content-1 {
+
+        font-size: 22px;
+
+        span {
+          font-weight: 500;
+        }
+      }
+
+      .btn-1 {
+        button {
+          border-radius: 12px;
+          height: 40px;
+          background: black;
+          color: white;
+          padding: 12px 24px 35px 24px;
+          text-align: center;
+
+
+        }
+
+      }
+
+    }
+  }
+}
