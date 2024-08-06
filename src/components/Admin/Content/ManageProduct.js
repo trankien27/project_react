@@ -11,7 +11,7 @@ function ProductModal(props) {
     const { show, setShow } = props;
 
 
-    const handleClose = () => setShow(false);
+
     const [nameProduct, setNameProduct] = useState("");
     const [priceProduct, setPriceProduct] = useState(0);
     const [quantityProduct, setQuantityProduct] = useState(0);
@@ -20,6 +20,16 @@ function ProductModal(props) {
 
     const [previewImg, setPreviewImg] = useState("");
 
+
+    const handleClose = () => {
+        setShow(false);
+        setNameProduct("");
+        setPriceProduct(0);
+        setQuantityProduct(0);
+        setDescriptionProduct("");
+        setImgProduct("");
+        setPreviewImg("");
+    }
     const handleUpLoadImage = (event) => {
         if (event.target && event.target.files && event.target.files[0]) {
             setPreviewImg(URL.createObjectURL(event.target.files[0]));
@@ -77,7 +87,7 @@ function ProductModal(props) {
                 backdrop='static'
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Thêm người dùng</Modal.Title>
+                    <Modal.Title>Thêm sản phẩm</Modal.Title>
                 </Modal.Header>
                 <Modal.Body><form className="row g-3">
                     <div className="col-md-12">

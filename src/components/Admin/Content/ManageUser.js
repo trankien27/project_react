@@ -1,19 +1,68 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { FcPlus } from "react-icons/fc";
+import './ManageUser.scss';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+const UserModal = (props) => {
 
-function Example() {
+    const { show, setShow } = props;
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [dob, setDob] = useState("");
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
 
-    const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+    };
+    const handleSubmit = async () => {
+        // const isValidEmail = validateEmail(email);
+
+        // //validate emaill
+        // if (!isValidEmail) {
+        //     toast.error('Email nhập sai định dạng')
+        //     return;
+        // }
+
+
+
+        var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjI5OTUwMzksImlhdCI6MTcyMjk1OTAzOSwianRpIjoiMjg1NzcyMjktNzljYS00MzgyLTg0NWEtMDRkYzU3NGQ1OWUxIiwic2NvcGUiOiJST0xFX0FETUlOIn0._lJJdz_7TEqjMCmWSjLQ2cr9MmvstuwKz8SqyZLPeoc-WMNJJMGq8d4MRlrGBvkdejB-zyVO9XDDMyplm15MfA";
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            }
+        };
+        const formdata = new FormData();
+        formdata.append('username', username);
+        formdata.append('firstname', firstname);
+        formdata.append('lastname', lastname);
+        formdata.append('email', email);
+        formdata.append('dob', dob);
+        formdata.append('password', password);
+
+        let data = Object.fromEntries(formdata.entries());
+        console.log(data)
+        await axios.post('http://localhost:8080/users', data, config)
+            .then(response => {
+                setShow(false);
+                // toast.success("Thêm người đùng thành công");
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                Launch demo modal
-            </Button>
 
             <Modal
                 show={show}
@@ -27,43 +76,36 @@ function Example() {
                 <Modal.Body><form className="row g-3">
                     <div className="col-md-12">
                         <label for="inputEmail4" className="form-label">Email</label>
-                        <input type="email" className="form-control" id="inputEmail4" />
+                        <input type="email" className="form-control" id="inputEmail4" value={email} onChange={(event) => setEmail(event.target.value)} />
                     </div>
                     <div className="col-6">
                         <label for="inputUsername" className="form-label">Tên đăng nhập</label>
-                        <input type="text" className="form-control" id="inputUsername" placeholder="Username" />
+                        <input type="text" className="form-control" id="inputUsername" placeholder="Username" value={username} onChange={(event) => setUsername(event.target.value)} />
                     </div>
                     <div className="col-md-6">
                         <label for="inputPassword4" className="form-label">Mật khẩu</label>
-                        <input type="password" className="form-control" id="inputPassword4" />
+                        <input type="password" className="form-control" id="inputPassword4" value={password} onChange={(event) => setPassword(event.target.value)} />
                     </div>
                     <div className="col-12">
                         <label for="inputDob" className="form-label">Ngày sinh</label>
-                        <input type="date" className="form-control" id="inputDob" placeholder="nn/TT/nnnn" />
+                        <input type="date" className="form-control" id="inputDob" placeholder="nn/TT/nnnn" value={dob} onChange={(event) => setDob(event.target.value)} />
                     </div>
                     <div className="col-md-6">
                         <label for="inputFirstname" className="form-label">Họ</label>
-                        <input type="text" className="form-control" id="inputFirstname" />
+                        <input type="text" className="form-control" id="inputFirstname" value={firstname} onChange={(event) => setFirstname(event.target.value)} />
                     </div>
                     <div className="col-md-6">
                         <label for="inputLastname" className="form-label">Tên</label>
-                        <input type="text" className="form-control" id="inputLastname" />
+                        <input type="text" className="form-control" id="inputLastname" value={lastname} onChange={(event) => setLastname(event.target.value)} />
                     </div>
-                    <div className="col-12">
-                        <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id="gridCheck" />
-                            <label className="form-check-label" for="gridCheck">
-                                Check me out
-                            </label>
-                        </div>
-                    </div>
+
 
                 </form></Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Đóng
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" onClick={handleSubmit}>
                         Lưu thay đổi
                     </Button>
                 </Modal.Footer>
@@ -76,15 +118,16 @@ function Example() {
 
 
 const ManageUser = (props) => {
+    const [showModal, setShowModal] = useState(false);
     return (
         <div className="manage-user-container">
             <div className="title">
                 Quản lý người dùng
             </div>
-            <div className="user-container">
-                <div>
-                    <button>Thêm</button>
-                    <Example />
+            <div className="user-content">
+                <div className='btn-add-user'>
+                    <button onClick={() => setShowModal(true)} className='btn btn-primary' >Thêm người dùng <FcPlus /></button>
+                    <UserModal show={showModal} setShow={setShowModal} />
                 </div>
                 <div>
                     table user
