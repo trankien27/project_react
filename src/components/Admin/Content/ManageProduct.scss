@@ -1,0 +1,47 @@
+.modal-add-user {
+    .label-upload {
+        display: flex;
+        align-items: center;
+
+        padding: 5px;
+        border-radius: 5px;
+        background: #eeeeee;
+        width: 40%;
+        cursor: pointer;
+        gap: 5px;
+    }
+
+    .img-preview {
+        border: 1px ridge #ccc;
+        height: 150px;
+        display: flex;
+        border-radius: 5px;
+        justify-content: center;
+        align-items: center;
+        color: #ccc;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+
+    }
+}
+
+.manage-product-container {
+    padding: 10px;
+
+    .title {
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .product-content {
+
+        .btn-add-product {
+            margin: 15px 0;
+        }
+
+    }
+}

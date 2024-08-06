@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 function Example() {
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -41,7 +42,7 @@ function Example() {
                         <input type="date" className="form-control" id="inputDob" placeholder="nn/TT/nnnn" />
                     </div>
                     <div className="col-md-6">
-                        <label for="inputFirstname" classNameName="form-label">Họ</label>
+                        <label for="inputFirstname" className="form-label">Họ</label>
                         <input type="text" className="form-control" id="inputFirstname" />
                     </div>
                     <div className="col-md-6">
@@ -76,11 +77,11 @@ function Example() {
 
 const ManageUser = (props) => {
     return (
-        <div classNameName="manage-user-container">
-            <div classNameName="title">
+        <div className="manage-user-container">
+            <div className="title">
                 Quản lý người dùng
             </div>
-            <div classNameName="user-container">
+            <div className="user-container">
                 <div>
                     <button>Thêm</button>
                     <Example />
