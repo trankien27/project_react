@@ -25,7 +25,7 @@ const Header = () => {
                     </Nav>
                     <Nav>
                         <button className='btn-login'><NavLink to='/login'>Login</NavLink></button>
-                        <button className='btn-signup'><NavLink to='/login'>Sign up</NavLink></button>
+                        <button className='btn-signup'><NavLink to='/register'>Sign up</NavLink></button>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

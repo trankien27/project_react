@@ -51,7 +51,7 @@ function ProductModal(props) {
 
         // console.log(data)
 
-        var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjI5NDEwODcsImlhdCI6MTcyMjkwNTA4NywianRpIjoiYjk4MmE0MjYtMmY0OC00YmExLWJkZDctMjZkZGRkZmYzZmRlIiwic2NvcGUiOiJST0xFX0FETUlOIn0.C2XfXZkivNpgjvnN_U6w2l7TMGbhuxECILOS-_wI_K7-xKUo18CBIS8eaXaPowiYQj38NUJoQWnLbPpdVSKOgw";
+        var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjI5OTU2MzAsImlhdCI6MTcyMjk1OTYzMCwianRpIjoiOWZkY2RlMTktYjM3NC00MWU0LTgzNTAtMmRmMDJjZDEyNWNmIiwic2NvcGUiOiJST0xFX0FETUlOIn0.F4funMzUFkVd1PviLqo1iPF9A9l-8TU-iVJLUzJooxaiCxrxJdxTrLOo8QxPcJ1dEIZyw52t6kEvuWlOAtyTYQ";
         const config = {
             headers: {
                 "Authorization": `Bearer ${token}`,

@@ -13,6 +13,7 @@ import Admin from './components/Admin/Admin';
 import ManageUser from './components/Admin/Content/ManageUser';
 import ManageProduct from './components/Admin/Content/ManageProduct';
 import Dashboard from './components/Admin/Content/Dashboard';
+import Register from './components/login/Register';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -27,6 +28,7 @@ root.render(
             <Route index element={<HomePage />} />
             <Route path='User' element={<User />} />
             <Route path='login' element={<Login />} />
+            <Route path='register' element={<Register />} />
           </Route>
 
           <Route path='/admin' element={<Admin />} >

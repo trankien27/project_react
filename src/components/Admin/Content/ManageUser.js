@@ -26,14 +26,17 @@ const UserModal = (props) => {
             );
     };
     const handleSubmit = async () => {
-        // const isValidEmail = validateEmail(email);
+        const isValidEmail = validateEmail(email);
 
-        // //validate emaill
-        // if (!isValidEmail) {
-        //     toast.error('Email nhập sai định dạng')
-        //     return;
-        // }
-
+        //validate emaill
+        if (!isValidEmail) {
+            toast.error('Email nhập sai định dạng!')
+            return;
+        }
+        if (!password) {
+            toast.error('Mật khẩu không được để trống!');
+            return;
+        }
 
 
         var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjI5OTUwMzksImlhdCI6MTcyMjk1OTAzOSwianRpIjoiMjg1NzcyMjktNzljYS00MzgyLTg0NWEtMDRkYzU3NGQ1OWUxIiwic2NvcGUiOiJST0xFX0FETUlOIn0._lJJdz_7TEqjMCmWSjLQ2cr9MmvstuwKz8SqyZLPeoc-WMNJJMGq8d4MRlrGBvkdejB-zyVO9XDDMyplm15MfA";
@@ -55,11 +58,19 @@ const UserModal = (props) => {
         await axios.post('http://localhost:8080/users', data, config)
             .then(response => {
                 setShow(false);
-                // toast.success("Thêm người đùng thành công");
+                setEmail("");
+                setDob("");
+                setFirstname("");
+                setLastname("");
+                setPassword("");
+                setUsername("");
+                toast.success("Thêm người đùng thành công");
+
             })
             .catch(error => {
                 console.log(error);
             });
+
     }
     return (
         <>
