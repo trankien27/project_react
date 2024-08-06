@@ -14,7 +14,7 @@ const UserModal = (props) => {
     const [dob, setDob] = useState("");
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
-
+    const [token, setToken] = useState("");
 
     const handleClose = () => setShow(false);
 
@@ -25,8 +25,18 @@ const UserModal = (props) => {
                 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             );
     };
+
+
     const handleSubmit = async () => {
         const isValidEmail = validateEmail(email);
+
+        let login = {
+            username: 'admin',
+            password: 'admin'
+        }
+        await axios.post('http://localhost:8080/auth/token', login).then(res => {
+            setToken(res.data.result.token);
+        })
 
         //validate emaill
         if (!isValidEmail) {
@@ -39,7 +49,7 @@ const UserModal = (props) => {
         }
 
 
-        var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjI5OTUwMzksImlhdCI6MTcyMjk1OTAzOSwianRpIjoiMjg1NzcyMjktNzljYS00MzgyLTg0NWEtMDRkYzU3NGQ1OWUxIiwic2NvcGUiOiJST0xFX0FETUlOIn0._lJJdz_7TEqjMCmWSjLQ2cr9MmvstuwKz8SqyZLPeoc-WMNJJMGq8d4MRlrGBvkdejB-zyVO9XDDMyplm15MfA";
+
         const config = {
             headers: {
                 "Authorization": `Bearer ${token}`,
