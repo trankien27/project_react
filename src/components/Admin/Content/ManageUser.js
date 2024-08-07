@@ -5,6 +5,7 @@ import { FcPlus } from "react-icons/fc";
 import './ManageUser.scss';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { parseISO, differenceInYears } from 'date-fns';
 const UserModal = (props) => {
 
     const { show, setShow } = props;
@@ -16,7 +17,16 @@ const UserModal = (props) => {
     const [lastname, setLastname] = useState("");
     const [token, setToken] = useState("");
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+
+        setShow(false);
+        setEmail("");
+        setDob("");
+        setFirstname("");
+        setLastname("");
+        setPassword("");
+        setUsername("");
+    }
 
     const validateEmail = (email) => {
         return String(email)
@@ -28,15 +38,26 @@ const UserModal = (props) => {
 
 
     const handleSubmit = async () => {
-        const isValidEmail = validateEmail(email);
-
-        let login = {
-            username: 'admin',
-            password: 'admin'
+        var nowDate = new Date();
+        const birthDate = parseISO(dob);
+        if (differenceInYears(nowDate, birthDate) < 18) {
+            toast.warning("Bạn phải ít nhất 18 tuổi!")
+            return;
         }
-        await axios.post('http://localhost:8080/auth/token', login).then(res => {
-            setToken(res.data.result.token);
-        })
+
+        const isValidEmail = validateEmail(email);
+        let res = await axios.get("http://localhost:8080/users/${username}");
+        if (res.data.result) {
+            toast.error("username đã tồn tại!")
+            return
+        }
+        // let login = {
+        //     username: 'admin',
+        //     password: 'admin'
+        // }
+        // await axios.post('http://localhost:8080/auth/token', login).then(res => {
+        //     setToken(res.data.result.token);
+        // })
 
         //validate emaill
         if (!isValidEmail) {
@@ -50,11 +71,11 @@ const UserModal = (props) => {
 
 
 
-        const config = {
-            headers: {
-                "Authorization": `Bearer ${token}`,
-            }
-        };
+        // const config = {
+        //     headers: {
+        //         "Authorization": `Bearer ${token}`,
+        //     }
+        // };
         const formdata = new FormData();
         formdata.append('username', username);
         formdata.append('firstname', firstname);
@@ -65,20 +86,15 @@ const UserModal = (props) => {
 
         let data = Object.fromEntries(formdata.entries());
         console.log(data)
-        await axios.post('http://localhost:8080/users', data, config)
+        await axios.post('http://localhost:8080/users', data)
             .then(response => {
-                setShow(false);
-                setEmail("");
-                setDob("");
-                setFirstname("");
-                setLastname("");
-                setPassword("");
-                setUsername("");
+                handleClose();
                 toast.success("Thêm người đùng thành công");
 
             })
             .catch(error => {
-                console.log(error);
+                // handleClose();
+                toast.error('Đã xảy ra lỗi vì bạn nhập sai(Tên đăng nhập trùng hoặc ngày sinh không hợp lệ)')
             });
 
     }
