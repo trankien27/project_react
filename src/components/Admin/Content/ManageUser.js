@@ -6,6 +6,7 @@ import './ManageUser.scss';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { parseISO, differenceInYears } from 'date-fns';
+import { CheckExistedUsername, CreateNewUser } from '../../../ApiService/Service';
 const UserModal = (props) => {
 
     const { show, setShow } = props;
@@ -38,6 +39,8 @@ const UserModal = (props) => {
 
 
     const handleSubmit = async () => {
+
+        //validate age
         var nowDate = new Date();
         const birthDate = parseISO(dob);
         if (differenceInYears(nowDate, birthDate) < 18) {
@@ -45,55 +48,34 @@ const UserModal = (props) => {
             return;
         }
 
-        const isValidEmail = validateEmail(email);
-        let res = await axios.get("http://localhost:8080/users/${username}");
+
+        //validate Username
+
+        let res = await CheckExistedUsername(username);
         if (res.data.result) {
             toast.error("username đã tồn tại!")
             return
         }
-        // let login = {
-        //     username: 'admin',
-        //     password: 'admin'
-        // }
-        // await axios.post('http://localhost:8080/auth/token', login).then(res => {
-        //     setToken(res.data.result.token);
-        // })
 
-        //validate emaill
+        //validate email
+        const isValidEmail = validateEmail(email);
         if (!isValidEmail) {
             toast.error('Email nhập sai định dạng!')
             return;
         }
-        if (!password) {
-            toast.error('Mật khẩu không được để trống!');
+        //check null password
+        if (!password || !firstname || !lastname || !dob) {
+            toast.warning('Không được để trống thông tin!');
             return;
         }
 
-
-
-        // const config = {
-        //     headers: {
-        //         "Authorization": `Bearer ${token}`,
-        //     }
-        // };
-        const formdata = new FormData();
-        formdata.append('username', username);
-        formdata.append('firstname', firstname);
-        formdata.append('lastname', lastname);
-        formdata.append('email', email);
-        formdata.append('dob', dob);
-        formdata.append('password', password);
-
-        let data = Object.fromEntries(formdata.entries());
-        console.log(data)
-        await axios.post('http://localhost:8080/users', data)
+        await CreateNewUser(username, firstname, lastname, email, dob, password)
             .then(response => {
                 handleClose();
                 toast.success("Thêm người đùng thành công");
 
             })
             .catch(error => {
-                // handleClose();
                 toast.error('Đã xảy ra lỗi vì bạn nhập sai(Tên đăng nhập trùng hoặc ngày sinh không hợp lệ)')
             });
 

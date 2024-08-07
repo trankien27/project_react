@@ -6,6 +6,8 @@ import { FaFileUpload } from "react-icons/fa";
 import { FcPlus } from "react-icons/fc";
 
 import axios, { Axios } from 'axios';
+import { CreateNewProduct } from '../../../ApiService/Service';
+import { toast } from 'react-toastify';
 
 function ProductModal(props) {
     const { show, setShow } = props;
@@ -40,39 +42,19 @@ function ProductModal(props) {
 
     }
     const handleSubmitCreateProduct = async () => {
-        // let data = {
-        //     productName: nameProduct,
-        //     productDescription: descriptionProduct,
-        //     productImage: imgProduct,
-        //     productQuantity: quantityProduct,
-        //     productPrice: priceProduct
+        try {
+            await CreateNewProduct(nameProduct, descriptionProduct, imgProduct, quantityProduct, priceProduct);
+            toast.success("Thêm sản phẩm thành công")
+            handleClose();
+        } catch (error) {
+            toast.error("bạn nhập thông tin chưa đúng")
+            console.log(error);
+        }
 
-        // }
 
-        // console.log(data)
+        ;
+        // console.log(res)
 
-        var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjI5OTU2MzAsImlhdCI6MTcyMjk1OTYzMCwianRpIjoiOWZkY2RlMTktYjM3NC00MWU0LTgzNTAtMmRmMDJjZDEyNWNmIiwic2NvcGUiOiJST0xFX0FETUlOIn0.F4funMzUFkVd1PviLqo1iPF9A9l-8TU-iVJLUzJooxaiCxrxJdxTrLOo8QxPcJ1dEIZyw52t6kEvuWlOAtyTYQ";
-        const config = {
-            headers: {
-                "Authorization": `Bearer ${token}`,
-            }
-        };
-        const formdata = new FormData();
-        formdata.append('productName', nameProduct);
-        formdata.append('productDescription', descriptionProduct);
-        formdata.append('productImage', imgProduct);
-        formdata.append('productQuantity', quantityProduct);
-        formdata.append('productPrice', priceProduct);
-
-        let data = Object.fromEntries(formdata.entries());
-        console.log(data)
-        await axios.post('http://localhost:8080/products', data, config)
-            .then(response => {
-                setShow(false);
-            })
-            .catch(error => {
-                console.log(error);
-            });
 
     }
 
