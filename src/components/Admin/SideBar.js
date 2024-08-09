@@ -1,5 +1,8 @@
 
 import 'react-pro-sidebar/dist/css/styles.css';
+import { FaMobileAlt, FaHome, FaUser } from "react-icons/fa";
+import { MdManageAccounts } from "react-icons/md";
+
 import {
     ProSidebar,
     Menu,
@@ -18,7 +21,7 @@ const SideBar = (props) => {
     return (
         <div>
             <ProSidebar
-                image={img}
+
                 collapsed={collapsed}>
 
 
@@ -40,25 +43,25 @@ const SideBar = (props) => {
                 </SidebarHeader>
 
                 <SidebarContent>
-                    <Menu iconShape="circle">
+                    <Menu >
                         <MenuItem
                             icon={<FaTachometerAlt />}
-                            suffix={<span className="badge red">new</span>}
+
                         >
                             <NavLink to="/admin"></NavLink>
                             Dashboard
                         </MenuItem>
-                        <MenuItem icon={<FaGem />}><NavLink to="/">Home</NavLink></MenuItem>
+                        <MenuItem icon={<FaHome />}><NavLink to="/">Home</NavLink></MenuItem>
                     </Menu>
-                    <Menu iconShape="circle"
+                    <Menu
                     >
                         <SubMenu
                             suffix={<span className="badge yellow">2</span>}
                             title='Quản lý'
-                            icon={<FaRegLaughWink />}
+                            icon={<MdManageAccounts />}
                         >
-                            <MenuItem ><Link to='/admin/manage-user' />Người dùng</MenuItem>
-                            <MenuItem ><Link to='/admin/manage-product' />Sản phẩm</MenuItem>
+                            <MenuItem icon={<FaUser />} ><Link to='/admin/manage-user' />Người dùng</MenuItem>
+                            <MenuItem icon={<FaMobileAlt />}><Link to='/admin/manage-product' />Sản phẩm</MenuItem>
                         </SubMenu>
 
                     </Menu>

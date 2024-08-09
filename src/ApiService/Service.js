@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from "../utils/axiosCustomize";
+
 
 
 //api thêm người dùng
@@ -13,14 +14,14 @@ const CreateNewUser = (username, firstname, lastname, email, dob, password) => {
 
     let data = Object.fromEntries(formdata.entries());
     console.log(data)
-    return axios.post('http://localhost:8080/users', data);
+    return axios.post('users', data);
 
 }
 export { CreateNewUser }
 
 //api kiểm tra username
 const CheckExistedUsername = (username) => {
-    return axios.get("http://localhost:8080/users/" + username)
+    return axios.get("users/" + username)
 
 }
 export { CheckExistedUsername }
@@ -45,7 +46,7 @@ const CreateNewProduct = (nameProduct, descriptionProduct, imgProduct, quantityP
     formdata.append('productPrice', priceProduct);
 
     let data = Object.fromEntries(formdata.entries());
-    return axios.post('http://localhost:8080/products', data, config);
+    return axios.post('products', data, config);
 
 }
 export { CreateNewProduct }
