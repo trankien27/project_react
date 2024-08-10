@@ -8,6 +8,7 @@ import { FcPlus } from "react-icons/fc";
 import axios, { Axios } from 'axios';
 import { CreateNewProduct } from '../../../ApiService/Service';
 import { toast } from 'react-toastify';
+import TableProduct from './TableProduct';
 
 function ProductModal(props) {
     const { show, setShow } = props;
@@ -132,7 +133,7 @@ const ManageProduct = (props) => {
                 </div>
                 <div className='table-products'>
 
-                    table
+                    <TableProduct />
                 </div>
                 <ProductModal
                     show={showModal}

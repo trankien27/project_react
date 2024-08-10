@@ -7,7 +7,11 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { parseISO, differenceInYears } from 'date-fns';
 import { CheckExistedUsername, CreateNewUser } from '../../../ApiService/Service';
+import TableUser from './TableUser';
+import { useEffect } from "react"
+import { GetAllUser } from "../../../ApiService/Service";
 const UserModal = (props) => {
+
 
     const { show, setShow } = props;
     const [email, setEmail] = useState("");
@@ -52,7 +56,8 @@ const UserModal = (props) => {
         //validate Username
 
         let res = await CheckExistedUsername(username);
-        if (res.data.result) {
+        console.log(res.result)
+        if (res.result) {
             toast.error("username đã tồn tại!")
             return
         }
@@ -70,9 +75,10 @@ const UserModal = (props) => {
         }
 
         await CreateNewUser(username, firstname, lastname, email, dob, password)
-            .then(response => {
+            .then(async (response) => {
                 handleClose();
                 toast.success("Thêm người đùng thành công");
+                await props.fetchUser();
 
             })
             .catch(error => {
@@ -137,6 +143,20 @@ const UserModal = (props) => {
 
 
 const ManageUser = (props) => {
+    const [listUser, setListUser] = useState([]);
+
+
+
+    const fetchUser = async () => {
+        let res = await GetAllUser();
+        console.log(res);
+        setListUser(res.result)
+    }
+
+    useEffect(() => {
+        fetchUser();
+    }, []);
+
     const [showModal, setShowModal] = useState(false);
     return (
         <div className="manage-user-container">
@@ -146,10 +166,13 @@ const ManageUser = (props) => {
             <div className="user-content">
                 <div className='btn-add-user'>
                     <button onClick={() => setShowModal(true)} className='btn btn-primary' >Thêm người dùng <FcPlus /></button>
-                    <UserModal show={showModal} setShow={setShowModal} />
+                    <UserModal
+                        fetchUser={fetchUser}
+                        show={showModal}
+                        setShow={setShowModal} />
                 </div>
                 <div>
-                    table user
+                    <TableUser listUser={listUser} />
                 </div>
             </div>
 
