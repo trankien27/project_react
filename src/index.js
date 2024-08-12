@@ -10,8 +10,8 @@ import User from './components/user/User';
 import Login from './components/login/Login';
 import HomePage from './components/home/HomePage';
 import Admin from './components/Admin/Admin';
-import ManageUser from './components/Admin/Content/ManageUser';
-import ManageProduct from './components/Admin/Content/ManageProduct';
+import ManageUser from './components/Admin/Content/User/ManageUser';
+import ManageProduct from './components/Admin/Content/Product/ManageProduct';
 import Dashboard from './components/Admin/Content/Dashboard';
 import Register from './components/login/Register';
 

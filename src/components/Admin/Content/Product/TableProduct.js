@@ -1,18 +1,8 @@
-import { useEffect, useState } from "react"
-import { GetAllProduct } from "../../../ApiService/Service";
+
 const TableProduct = (props) => {
-    const [listProduct, setListProduct] = useState([]);
-    const fetchlistProduct = async () => {
-        let res = await GetAllProduct();
-        // console.log(res.result)
-        setListProduct(res.result)
+    const { listProduct } = props
+    const { showUpdateModal, setShowUpdateModal } = props;
 
-    }
-
-    useEffect(() => {
-        fetchlistProduct();
-
-    }, []);
 
     return (
         <>
@@ -37,10 +27,11 @@ const TableProduct = (props) => {
                                     <td>{item.productQuantity}</td>
                                     <td>{item.productPrice}</td>
                                     <td>{item.productDescription}</td>
-                                    <td>
-                                        <button className="btn">View</button>
-                                        <button className="btn btn-warning">Update</button>
-                                        <button className="btn btn-danger">Delete</button>
+                                    <td >
+                                        <button className="btn btn-outline-primary">View</button>
+                                        <button className="btn btn-outline-warning"
+                                            onClick={() => props.handleUpdateUser(item)}>Update</button>
+                                        <button className="btn btn-outline-danger">Delete</button>
                                     </td>
                                 </tr>
                             )

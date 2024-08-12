@@ -1,6 +1,6 @@
 import axios from "../utils/axiosCustomize";
 
-var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjMzMDE0OTUsImlhdCI6MTcyMzI2NTQ5NSwianRpIjoiOTk5YTBhYWItYjQ1Mi00MDM0LTk2YWEtZDQ0ZjNhMTM4OGNmIiwic2NvcGUiOiJST0xFX0FETUlOIn0.Z8dVymMM5j3eE_HpXRf2_3nXXC36ntcIUZv2YI6CBlPTaQUNCTs6qi5b39_YyaSjq26DBVhTX5oZe3NyeN8k2Q";
+var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjM1MTIyNTcsImlhdCI6MTcyMzQ3NjI1NywianRpIjoiMTU4N2U3MzQtODM5Mi00ZjliLTg2YzYtNmJlMDVkNjQxMWE2Iiwic2NvcGUiOiJST0xFX0FETUlOIn0.-FMEHixolRbxmJVskMitiQ6ZCr15uGLPUPHE6yTk5TY0I3KjA-eozPUekdEu2EJd5BxFa7ytW6kjoLVrXDeUSA";
 const config = {
     headers: {
         "Authorization": `Bearer ${token}`,
@@ -69,3 +69,24 @@ const CreateNewProduct = (nameProduct, descriptionProduct, imgProduct, quantityP
 
 }
 export { CreateNewProduct }
+
+const UpdateProductApi = (idProduct, nameProduct, descriptionProduct, imgProduct, quantityProduct, priceProduct) => {
+
+    // var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjM1MTIyNTcsImlhdCI6MTcyMzQ3NjI1NywianRpIjoiMTU4N2U3MzQtODM5Mi00ZjliLTg2YzYtNmJlMDVkNjQxMWE2Iiwic2NvcGUiOiJST0xFX0FETUlOIn0.-FMEHixolRbxmJVskMitiQ6ZCr15uGLPUPHE6yTk5TY0I3KjA-eozPUekdEu2EJd5BxFa7ytW6kjoLVrXDeUSA";
+    // const config = {
+    //     headers: {
+    //         "Authorization": `Bearer ${token}`,
+    //     }
+    // };
+    const formdata = new FormData();
+    formdata.append('productName', nameProduct);
+    formdata.append('productDescription', descriptionProduct);
+    formdata.append('productImage', imgProduct);
+    formdata.append('productQuantity', quantityProduct);
+    formdata.append('productPrice', priceProduct);
+
+    let data = Object.fromEntries(formdata.entries());
+    return axios.put("products/" + idProduct, data, config);
+
+}
+export { UpdateProductApi }

@@ -1,17 +1,19 @@
-import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import './ManageProduct.scss';
+
 import { FaFileUpload } from "react-icons/fa";
-import { FcPlus } from "react-icons/fc";
+
 
 import axios, { Axios } from 'axios';
-import { CreateNewProduct } from '../../../ApiService/Service';
+import { CreateNewProduct } from '../../../../ApiService/Service';
 import { toast } from 'react-toastify';
-import TableProduct from './TableProduct';
+import { useState } from 'react';
 
 function ProductModal(props) {
+
+
     const { show, setShow } = props;
+
 
 
 
@@ -47,6 +49,7 @@ function ProductModal(props) {
             await CreateNewProduct(nameProduct, descriptionProduct, imgProduct, quantityProduct, priceProduct);
             toast.success("Thêm sản phẩm thành công")
             handleClose();
+            await props.fetchListProduct();
         } catch (error) {
             toast.error("bạn nhập thông tin chưa đúng")
             console.log(error);
@@ -117,33 +120,4 @@ function ProductModal(props) {
         </>
     );
 }
-
-const ManageProduct = (props) => {
-
-    const [showModal, setShowModal] = useState(false);
-    return (
-        <div className="manage-product-container">
-
-            <div className='title'>
-                Quản lý hàng hoá
-            </div>
-            <div className='product-content'>
-                <div className='btn-add-product'>
-                    <button className='btn btn-primary' variant="primary" onClick={() => setShowModal(true)}><FcPlus /> Thêm sản phẩm </button>
-                </div>
-                <div className='table-products'>
-
-                    <TableProduct />
-                </div>
-                <ProductModal
-                    show={showModal}
-                    setShow={setShowModal}
-                />
-            </div>
-
-        </div>
-
-
-    )
-}
-export default ManageProduct;
+export default ProductModal;

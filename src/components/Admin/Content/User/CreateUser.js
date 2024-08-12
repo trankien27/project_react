@@ -1,15 +1,10 @@
-import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { FcPlus } from "react-icons/fc";
-import './ManageUser.scss';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { parseISO, differenceInYears } from 'date-fns';
-import { CheckExistedUsername, CreateNewUser } from '../../../ApiService/Service';
-import TableUser from './TableUser';
-import { useEffect } from "react"
-import { GetAllUser } from "../../../ApiService/Service";
+import { CheckExistedUsername, CreateNewUser } from '../../../../ApiService/Service';
+import { useState } from 'react';
 const UserModal = (props) => {
 
 
@@ -138,45 +133,4 @@ const UserModal = (props) => {
         </>
     );
 }
-
-
-
-
-const ManageUser = (props) => {
-    const [listUser, setListUser] = useState([]);
-
-
-
-    const fetchUser = async () => {
-        let res = await GetAllUser();
-        console.log(res);
-        setListUser(res.result)
-    }
-
-    useEffect(() => {
-        fetchUser();
-    }, []);
-
-    const [showModal, setShowModal] = useState(false);
-    return (
-        <div className="manage-user-container">
-            <div className="title">
-                Quản lý người dùng
-            </div>
-            <div className="user-content">
-                <div className='btn-add-user'>
-                    <button onClick={() => setShowModal(true)} className='btn btn-primary' >Thêm người dùng <FcPlus /></button>
-                    <UserModal
-                        fetchUser={fetchUser}
-                        show={showModal}
-                        setShow={setShowModal} />
-                </div>
-                <div>
-                    <TableUser listUser={listUser} />
-                </div>
-            </div>
-
-        </div>
-    )
-}
-export default ManageUser;
+export default UserModal;

@@ -1,10 +1,13 @@
 .admin-container {
     display: flex;
+    flex-direction: row;
 
     .admin-sidebar {
         .pro-sidebar {
-            height: 100vh !important;
-            background: white
+            background-color: aliceblue !important;
+            height: 100vh;
+
+
         }
     }
 }
