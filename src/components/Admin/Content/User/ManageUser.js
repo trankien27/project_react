@@ -5,13 +5,15 @@ import './ManageUser.scss';
 import TableUser from './TableUser';
 import { useEffect } from "react"
 import { GetAllUser } from "../../../../ApiService/Service";
+import UpdaetUserModal from './UpdateUser';
 
 
 
 
 const ManageUser = (props) => {
     const [listUser, setListUser] = useState([]);
-
+    const [showUpdateModal, setShowUpdateModal] = useState(false);
+    const [dataUpdate, setDataUpdate] = useState();
     const fetchUser = async () => {
         let res = await GetAllUser();
         console.log(res);
@@ -21,6 +23,11 @@ const ManageUser = (props) => {
     useEffect(() => {
         fetchUser();
     }, []);
+    const hanldeUpdateUser = (user) => {
+        setDataUpdate(user);
+        setShowUpdateModal(true);
+
+    }
 
     const [showModal, setShowModal] = useState(false);
     return (
@@ -35,9 +42,20 @@ const ManageUser = (props) => {
                         fetchUser={fetchUser}
                         show={showModal}
                         setShow={setShowModal} />
+
                 </div>
+                <UpdaetUserModal
+                    dataUpdate={dataUpdate}
+                    show={showUpdateModal}
+                    setShow={setShowUpdateModal}
+                    fetchUser={fetchUser}
+
+                />
                 <div>
-                    <TableUser listUser={listUser} />
+                    <TableUser
+                        hanldeUpdateUser={hanldeUpdateUser}
+                        listUser={listUser} />
+
                 </div>
             </div>
 

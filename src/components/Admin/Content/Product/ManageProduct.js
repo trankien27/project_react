@@ -10,7 +10,7 @@ import UpdateProduct from './UpdateProduct';
 
 const ManageProduct = (props) => {
     const [listProduct, setListProduct] = useState([]);
-    const { show, setShow } = props;
+
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const fetchlistProduct = async () => {
         let res = await GetAllProduct();
@@ -27,9 +27,9 @@ const ManageProduct = (props) => {
     const [dataUpdate, setDataUpdate] = useState();
     const [showModal, setShowModal] = useState(false);
 
-    const handleUpdateUser = (user) => {
+    const handleUpdateProduct = (product) => {
         setShowUpdateModal(true);
-        setDataUpdate(user);
+        setDataUpdate(product);
 
 
 
@@ -48,7 +48,7 @@ const ManageProduct = (props) => {
                 <div className='table-products'>
 
                     <TableProduct listProduct={listProduct}
-                        handleUpdateUser={handleUpdateUser}
+                        handleUpdateProduct={handleUpdateProduct}
                     />
                 </div>
                 <ProductModal

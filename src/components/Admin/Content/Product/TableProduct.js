@@ -30,7 +30,7 @@ const TableProduct = (props) => {
                                     <td >
                                         <button className="btn btn-outline-primary">View</button>
                                         <button className="btn btn-outline-warning"
-                                            onClick={() => props.handleUpdateUser(item)}>Update</button>
+                                            onClick={() => props.handleUpdateProduct(item)}>Update</button>
                                         <button className="btn btn-outline-danger">Delete</button>
                                     </td>
                                 </tr>

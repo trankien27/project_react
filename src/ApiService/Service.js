@@ -90,3 +90,20 @@ const UpdateProductApi = (idProduct, nameProduct, descriptionProduct, imgProduct
 
 }
 export { UpdateProductApi }
+
+const UpdateUserApi = (userID, username, firstname, lastname, email, dob, password) => {
+
+    const formdata = new FormData();
+    formdata.append('username', username);
+    formdata.append('firstname', firstname);
+    formdata.append('lastname', lastname);
+    formdata.append('email', email);
+    formdata.append('dob', dob);
+    formdata.append('password', password);
+
+    let data = Object.fromEntries(formdata.entries());
+    console.log(data)
+    return axios.put('users/' + userID, data, config);
+
+}
+export { UpdateUserApi }
