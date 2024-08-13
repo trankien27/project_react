@@ -28,7 +28,7 @@ const TableProduct = (props) => {
                                     <td>{item.productPrice}</td>
                                     <td>{item.productDescription}</td>
                                     <td >
-                                        <button className="btn btn-outline-primary">View</button>
+                                        <button className="btn btn-outline-primary" onClick={() => props.handleViewProduct(item)}>View</button>
                                         <button className="btn btn-outline-warning"
                                             onClick={() => props.handleUpdateProduct(item)}>Update</button>
                                         <button className="btn btn-outline-danger">Delete</button>

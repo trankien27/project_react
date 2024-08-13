@@ -6,12 +6,15 @@ import ProductModal from './CreateProduct';
 import { useEffect } from "react"
 import { GetAllProduct } from "../../../../ApiService/Service";
 import UpdateProduct from './UpdateProduct';
+import ViewProduct from './ViewProduct';
 
 
 const ManageProduct = (props) => {
     const [listProduct, setListProduct] = useState([]);
 
     const [showUpdateModal, setShowUpdateModal] = useState(false);
+
+    const [showViewModal, setShowViewModal] = useState(false);
     const fetchlistProduct = async () => {
         let res = await GetAllProduct();
         console.log(res.result)
@@ -27,12 +30,17 @@ const ManageProduct = (props) => {
     const [dataUpdate, setDataUpdate] = useState();
     const [showModal, setShowModal] = useState(false);
 
+
+    //update
     const handleUpdateProduct = (product) => {
         setShowUpdateModal(true);
         setDataUpdate(product);
+    }
 
-
-
+    //view
+    const handleViewProduct = (product) => {
+        setShowViewModal(true);
+        setDataUpdate(product);
     }
 
     return (
@@ -49,6 +57,8 @@ const ManageProduct = (props) => {
 
                     <TableProduct listProduct={listProduct}
                         handleUpdateProduct={handleUpdateProduct}
+                        handleViewProduct={handleViewProduct}
+
                     />
                 </div>
                 <ProductModal
@@ -62,6 +72,11 @@ const ManageProduct = (props) => {
                     setShow={setShowUpdateModal}
                     fetchListProduct={fetchlistProduct}
 
+                />
+                <ViewProduct
+                    dataUpdate={dataUpdate}
+                    show={showViewModal}
+                    setShow={setShowViewModal}
                 />
             </div>
 
