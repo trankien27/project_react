@@ -1,6 +1,6 @@
 import axios from "../utils/axiosCustomize";
 
-var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjM1MTIyNTcsImlhdCI6MTcyMzQ3NjI1NywianRpIjoiMTU4N2U3MzQtODM5Mi00ZjliLTg2YzYtNmJlMDVkNjQxMWE2Iiwic2NvcGUiOiJST0xFX0FETUlOIn0.-FMEHixolRbxmJVskMitiQ6ZCr15uGLPUPHE6yTk5TY0I3KjA-eozPUekdEu2EJd5BxFa7ytW6kjoLVrXDeUSA";
+var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjM1OTgyNjgsImlhdCI6MTcyMzU2MjI2OCwianRpIjoiY2YwZGZmODgtYmRjYy00ZWFkLThkYTEtNzAxNzk2NGRjYjg3Iiwic2NvcGUiOiJST0xFX0FETUlOIn0.1kcpNKyV-JKxjOc2z41Eo5oSp_bGJcBzURT2t41wjN-ObTLUBBtBAAzARTcaToVvl_CjMIXiNh7PBeuP3yozng";
 const config = {
     headers: {
         "Authorization": `Bearer ${token}`,
@@ -9,7 +9,7 @@ const config = {
 
 //api get all user
 const GetAllUser = () => {
-    // var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjMzMDA0NzIsImlhdCI6MTcyMzI2NDQ3MiwianRpIjoiYTE4OWE3NzEtODI4My00NzA4LWI1NzUtMDRjZWMyMmI3NTZlIiwic2NvcGUiOiJST0xFX0FETUlOIn0.2NgqJYbxaSm8PwrBa3dYJJuQD9uR6MTMqNLXCWDhTUm3eR_YlyKc1VwY0CkRPIw20b9Oipb_I7-Z8ji-WMEIC";
+    // var token = "";
     // const config = {
     //     headers: {
     //         "Authorization": `Bearer ${token}`,

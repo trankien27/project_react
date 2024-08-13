@@ -6,6 +6,8 @@ import TableUser from './TableUser';
 import { useEffect } from "react"
 import { GetAllUser } from "../../../../ApiService/Service";
 import UpdaetUserModal from './UpdateUser';
+import ViewUser from './ViewUser';
+import { constant } from 'lodash';
 
 
 
@@ -13,6 +15,7 @@ import UpdaetUserModal from './UpdateUser';
 const ManageUser = (props) => {
     const [listUser, setListUser] = useState([]);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
+    const [showViewModal, setShowViewModal] = useState(false);
     const [dataUpdate, setDataUpdate] = useState();
     const fetchUser = async () => {
         let res = await GetAllUser();
@@ -23,10 +26,18 @@ const ManageUser = (props) => {
     useEffect(() => {
         fetchUser();
     }, []);
+
+    //function update
     const hanldeUpdateUser = (user) => {
         setDataUpdate(user);
         setShowUpdateModal(true);
+    }
 
+
+    //function viewUser
+    const handleViewUser = (user) => {
+        setDataUpdate(user);
+        setShowViewModal(true);
     }
 
     const [showModal, setShowModal] = useState(false);
@@ -54,8 +65,17 @@ const ManageUser = (props) => {
                 <div>
                     <TableUser
                         hanldeUpdateUser={hanldeUpdateUser}
+                        handleViewUser={handleViewUser}
                         listUser={listUser} />
 
+                </div>
+                <div>
+                    <ViewUser
+                        dataUpdate={dataUpdate}
+                        show={showViewModal}
+                        setShow={setShowViewModal}
+
+                    />
                 </div>
             </div>
 

@@ -85,7 +85,7 @@ function UpdateProduct(props) {
                 <Modal.Body><form className="row g-3">
                     <div className="col-md-12">
                         <label for="inputNameProduct" className="form-label">Tên sản phẩm</label>
-                        <input type="text" className="form-control" id="inputNameProduct" value={nameProduct} onChange={(event) => setNameProduct(event.target.value)} />
+                        <input disabled={true} type="text" className="form-control" id="inputNameProduct" value={nameProduct} onChange={(event) => setNameProduct(event.target.value)} />
                     </div>
                     <div className="col-6">
                         <label for="inputPriceProduct" className="form-label">Giá sản phẩm</label>

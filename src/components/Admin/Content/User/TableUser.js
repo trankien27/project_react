@@ -29,7 +29,7 @@ const TableUser = (props) => {
                                     <td>{item.lastname}</td>
                                     <td>{item.email}</td>
                                     <td>{item.dob}</td>
-                                    <td>   <button className="btn">View</button>
+                                    <td>   <button className="btn btn-secondary" onClick={() => props.handleViewUser(item)}>View</button>
                                         <button className="btn btn-warning" onClick={() => props.hanldeUpdateUser(item)}>Update</button>
                                         <button className="btn btn-danger">Delete</button></td>
 
