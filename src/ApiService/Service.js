@@ -7,16 +7,13 @@ const config = {
     }
 };
 
-
-//User
-//api get all user
+//1.User
+//1.1.api get all user
 const GetAllUser = () => {
     return axios.get('users', config)
 
 }
-export { GetAllUser }
-
-// create new user
+// 1.2create new user
 const CreateNewUser = (username, firstname, lastname, email, dob, password) => {
     const formdata = new FormData();
     formdata.append('username', username);
@@ -31,8 +28,8 @@ const CreateNewUser = (username, firstname, lastname, email, dob, password) => {
     return axios.post('users', data);
 
 }
-export { CreateNewUser }
 
+//1.3 update user
 const UpdateUserApi = (userID, username, firstname, lastname, email, dob, password) => {
 
     const formdata = new FormData();
@@ -48,25 +45,22 @@ const UpdateUserApi = (userID, username, firstname, lastname, email, dob, passwo
     return axios.put('users/' + userID, data, config);
 
 }
-export { UpdateUserApi }
+//1.4 api kiểm tra username
+const CheckExistedUsername = (username) => {
+    return axios.get("users/" + username)
+}
+//1.5 api delete user
+const DeleteUserApi = (userID) => {
+
+    return axios.delete('users/' + userID, config);
+}
+//2Product
+//2.1 get all product
 const GetAllProduct = () => {
     return axios.get('products')
 }
-export { GetAllProduct }
 
-
-
-//api kiểm tra username
-const CheckExistedUsername = (username) => {
-    return axios.get("users/" + username)
-
-}
-export { CheckExistedUsername }
-
-
-//Product
-
-//create new product
+//2.2 create new product
 const CreateNewProduct = (nameProduct, descriptionProduct, imgProduct, quantityProduct, priceProduct) => {
 
 
@@ -81,9 +75,8 @@ const CreateNewProduct = (nameProduct, descriptionProduct, imgProduct, quantityP
     return axios.post('products', data, config);
 
 }
-export { CreateNewProduct }
 
-//update product
+//2.3 update product
 const UpdateProductApi = (idProduct, nameProduct, descriptionProduct, imgProduct, quantityProduct, priceProduct) => {
     const formdata = new FormData();
     formdata.append('productName', nameProduct);
@@ -96,11 +89,20 @@ const UpdateProductApi = (idProduct, nameProduct, descriptionProduct, imgProduct
     return axios.put("products/" + idProduct, data, config);
 
 }
-export { UpdateProductApi, DeleteProductApi }
-
-
+//2.4 xoá sản phẩm
 const DeleteProductApi = (productId) => {
 
     return axios.delete('products/' + productId, config);
+}
+export {
+    GetAllProduct,
+    UpdateProductApi,
+    DeleteProductApi,
+    CreateNewProduct,
 
+    CheckExistedUsername,
+    UpdateUserApi,
+    GetAllUser,
+    CreateNewUser,
+    DeleteUserApi
 }

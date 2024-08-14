@@ -1,26 +1,25 @@
-import { useState } from 'react';
+
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { DeleteProductApi } from '../../../../ApiService/Service';
-import { FaSync } from 'react-icons/fa';
+import { DeleteProductApi, DeleteUserApi } from '../../../../ApiService/Service';
 import { toast } from 'react-toastify';
 
-const DeleteProduct = (props) => {
+const DeleteUser = (props) => {
     const { show, setShow } = props;
     const { dataDelete } = props;
 
     const handleClose = () => setShow(false);
     const handleSubmitDelete = async () => {
         try {
-            await DeleteProductApi(dataDelete.productId);
+            await DeleteUserApi(dataDelete.userID);
 
             handleClose();
-            await props.fetchListProduct();
+            await props.fetchUser();
             toast.success("Xoá thành công!");
 
         } catch (error) {
             console.log(error);
-            toast.error(error);
+            toast.error("Đã xảy ra lỗi");
 
         }
 
@@ -34,9 +33,9 @@ const DeleteProduct = (props) => {
                 animation={true}
                 backdrop="static" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Xác nhận xoá sản phẩm</Modal.Title>
+                    <Modal.Title>Xác nhận xoá người dùng</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Bạn có chắc chắn muốn xoá sản phẩm:  <b>{dataDelete.productName}</b>?</Modal.Body>
+                <Modal.Body>Bạn có chắc chắn muốn xoá người dùng:  <b>{dataDelete.username}</b>?</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Huỷ
@@ -50,4 +49,4 @@ const DeleteProduct = (props) => {
     );
 }
 
-export default DeleteProduct;
+export default DeleteUser;

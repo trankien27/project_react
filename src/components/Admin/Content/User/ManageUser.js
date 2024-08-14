@@ -8,6 +8,7 @@ import { GetAllUser } from "../../../../ApiService/Service";
 import UpdaetUserModal from './UpdateUser';
 import ViewUser from './ViewUser';
 import { constant } from 'lodash';
+import DeleteUser from './DeleteUser';
 
 
 
@@ -17,9 +18,10 @@ const ManageUser = (props) => {
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showViewModal, setShowViewModal] = useState(false);
     const [dataUpdate, setDataUpdate] = useState();
+    const [dataDelete, setDataDelete] = useState();
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const fetchUser = async () => {
         let res = await GetAllUser();
-        console.log(res);
         setListUser(res.result)
     }
 
@@ -38,6 +40,13 @@ const ManageUser = (props) => {
     const handleViewUser = (user) => {
         setDataUpdate(user);
         setShowViewModal(true);
+    }
+    //deleteuser 
+    const hanldeDeleteUser = (user) => {
+        setDataDelete(user);
+        setShowDeleteModal(true);
+
+
     }
 
     const [showModal, setShowModal] = useState(false);
@@ -66,7 +75,10 @@ const ManageUser = (props) => {
                     <TableUser
                         hanldeUpdateUser={hanldeUpdateUser}
                         handleViewUser={handleViewUser}
-                        listUser={listUser} />
+                        listUser={listUser}
+                        hanldeDeleteUser={hanldeDeleteUser} />
+
+
 
                 </div>
                 <div>
@@ -74,6 +86,13 @@ const ManageUser = (props) => {
                         dataUpdate={dataUpdate}
                         show={showViewModal}
                         setShow={setShowViewModal}
+
+                    />
+                    <DeleteUser
+                        dataDelete={dataDelete}
+                        show={showDeleteModal}
+                        setShow={setShowDeleteModal}
+                        fetchUser={fetchUser}
 
                     />
                 </div>
