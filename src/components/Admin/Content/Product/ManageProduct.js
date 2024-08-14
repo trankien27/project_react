@@ -7,14 +7,20 @@ import { useEffect } from "react"
 import { GetAllProduct } from "../../../../ApiService/Service";
 import UpdateProduct from './UpdateProduct';
 import ViewProduct from './ViewProduct';
+import DeleteProduct from './DeleteProduct';
 
 
 const ManageProduct = (props) => {
     const [listProduct, setListProduct] = useState([]);
 
     const [showUpdateModal, setShowUpdateModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     const [showViewModal, setShowViewModal] = useState(false);
+    const [dataUpdate, setDataUpdate] = useState();
+    const [showModal, setShowModal] = useState(false);
+    const [dataDelete, setDataDelete] = useState();
+
     const fetchlistProduct = async () => {
         let res = await GetAllProduct();
         console.log(res.result)
@@ -27,8 +33,6 @@ const ManageProduct = (props) => {
 
     }, []);
 
-    const [dataUpdate, setDataUpdate] = useState();
-    const [showModal, setShowModal] = useState(false);
 
 
     //update
@@ -41,6 +45,12 @@ const ManageProduct = (props) => {
     const handleViewProduct = (product) => {
         setShowViewModal(true);
         setDataUpdate(product);
+    }
+
+    //delete
+    const hanldeDeleteProduct = (product) => {
+        setShowDeleteModal(true);
+        setDataDelete(product);
     }
 
     return (
@@ -58,6 +68,7 @@ const ManageProduct = (props) => {
                     <TableProduct listProduct={listProduct}
                         handleUpdateProduct={handleUpdateProduct}
                         handleViewProduct={handleViewProduct}
+                        hanldeDeleteProduct={hanldeDeleteProduct}
 
                     />
                 </div>
@@ -77,6 +88,12 @@ const ManageProduct = (props) => {
                     dataUpdate={dataUpdate}
                     show={showViewModal}
                     setShow={setShowViewModal}
+                />
+                <DeleteProduct
+                    dataDelete={dataDelete}
+                    show={showDeleteModal}
+                    setShow={setShowDeleteModal}
+                    fetchListProduct={fetchlistProduct}
                 />
             </div>
 

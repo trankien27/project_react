@@ -58,7 +58,7 @@ function UpdateProduct(props) {
             handleClose();
             await props.fetchListProduct();
         } catch (error) {
-            toast.error("bạn nhập thông tin chưa đúng")
+            toast.error("Đã xảy ra lỗi")
             console.log(error);
         }
 

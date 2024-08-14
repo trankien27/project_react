@@ -1,7 +1,7 @@
 
 const TableProduct = (props) => {
     const { listProduct } = props
-    const { showUpdateModal, setShowUpdateModal } = props;
+
 
 
     return (
@@ -28,10 +28,15 @@ const TableProduct = (props) => {
                                     <td>{item.productPrice}</td>
                                     <td>{item.productDescription}</td>
                                     <td >
-                                        <button className="btn btn-outline-primary" onClick={() => props.handleViewProduct(item)}>View</button>
+                                        <button className="btn btn-outline-primary"
+                                            onClick={() => props.handleViewProduct(item)}
+
+                                        >View</button>
                                         <button className="btn btn-outline-warning"
                                             onClick={() => props.handleUpdateProduct(item)}>Update</button>
-                                        <button className="btn btn-outline-danger">Delete</button>
+                                        <button className="btn btn-outline-danger"
+                                            onClick={() => props.hanldeDeleteProduct(item)}
+                                        >Delete</button>
                                     </td>
                                 </tr>
                             )
