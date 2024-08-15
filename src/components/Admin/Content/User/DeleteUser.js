@@ -35,7 +35,7 @@ const DeleteUser = (props) => {
                 <Modal.Header closeButton>
                     <Modal.Title>Xác nhận xoá người dùng</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Bạn có chắc chắn muốn xoá người dùng:  <b>{dataDelete.username}</b>?</Modal.Body>
+                <Modal.Body>Bạn có chắc chắn muốn xoá người dùng:  <b>{dataDelete ? dataDelete.username : ""}</b>?</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Huỷ

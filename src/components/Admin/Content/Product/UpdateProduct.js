@@ -56,7 +56,7 @@ function UpdateProduct(props) {
             await UpdateProductApi(idProduct, nameProduct, descriptionProduct, imgProduct, quantityProduct, priceProduct);
             toast.success("Cập nhật sản phẩm thành công")
             handleClose();
-            await props.fetchListProduct();
+            await props.fetchListProduct(0);
         } catch (error) {
             toast.error("Đã xảy ra lỗi")
             console.log(error);

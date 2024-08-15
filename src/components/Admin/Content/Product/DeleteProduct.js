@@ -15,7 +15,7 @@ const DeleteProduct = (props) => {
             await DeleteProductApi(dataDelete.productId);
 
             handleClose();
-            await props.fetchListProduct();
+            await props.fetchListProduct(0);
             toast.success("Xoá thành công!");
 
         } catch (error) {
@@ -36,7 +36,10 @@ const DeleteProduct = (props) => {
                 <Modal.Header closeButton>
                     <Modal.Title>Xác nhận xoá sản phẩm</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Bạn có chắc chắn muốn xoá sản phẩm:  <b>{dataDelete.productName}</b>?</Modal.Body>
+                <Modal.Body>Bạn có chắc chắn muốn xoá sản phẩm:  <b>{dataDelete ?
+                    dataDelete.productName
+                    : ""
+                }</b>?</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Huỷ

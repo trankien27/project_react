@@ -4,14 +4,18 @@ import TableProduct from './TableProduct';
 import { FcPlus } from "react-icons/fc";
 import ProductModal from './CreateProduct';
 import { useEffect } from "react"
-import { GetAllProduct } from "../../../../ApiService/Service";
+import { GetAllProduct, GetProductWithPaginate } from "../../../../ApiService/Service";
 import UpdateProduct from './UpdateProduct';
 import ViewProduct from './ViewProduct';
 import DeleteProduct from './DeleteProduct';
+import TableProductPaginate from './TableProductPaginate';
 
 
 const ManageProduct = (props) => {
+    const [PageNo, setPageNo] = useState(1);
+    const LIMIT_USER = 5;
     const [listProduct, setListProduct] = useState([]);
+    const [totalPage, setTotalPage] = useState();
 
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -21,17 +25,32 @@ const ManageProduct = (props) => {
     const [showModal, setShowModal] = useState(false);
     const [dataDelete, setDataDelete] = useState();
 
-    const fetchlistProduct = async () => {
+    const countPageTotal = async () => {
         let res = await GetAllProduct();
+
         console.log(res.result)
-        setListProduct(res.result)
+
 
     }
 
-    useEffect(() => {
-        fetchlistProduct();
 
-    }, []);
+    const fetchlistProductWithPaginate = async (page) => {
+
+        let res = await GetProductWithPaginate(page, LIMIT_USER);
+        setListProduct(res.result);
+
+    }
+
+    const handlePageClick = (page) => {
+        setPageNo(page);
+        console.log(PageNo)
+    }
+    useEffect(() => {
+        countPageTotal();
+        fetchlistProductWithPaginate(PageNo);
+        // fetchlistProduct();
+
+    }, [PageNo]);
 
 
 
@@ -46,12 +65,16 @@ const ManageProduct = (props) => {
         setShowViewModal(true);
         setDataUpdate(product);
     }
+    //page click
+
+
 
     //delete
     const hanldeDeleteProduct = (product) => {
         setShowDeleteModal(true);
         setDataDelete(product);
     }
+
 
     return (
         <div className="manage-product-container">
@@ -65,7 +88,9 @@ const ManageProduct = (props) => {
                 </div>
                 <div className='table-products'>
 
-                    <TableProduct listProduct={listProduct}
+                    <TableProductPaginate
+                        handlePageClick={handlePageClick}
+                        listProduct={listProduct}
                         handleUpdateProduct={handleUpdateProduct}
                         handleViewProduct={handleViewProduct}
                         hanldeDeleteProduct={hanldeDeleteProduct}
@@ -75,13 +100,13 @@ const ManageProduct = (props) => {
                 <ProductModal
                     show={showModal}
                     setShow={setShowModal}
-                    fetchListProduct={fetchlistProduct}
+                    fetchListProduct={fetchlistProductWithPaginate}
                 />
                 <UpdateProduct
                     dataUpdate={dataUpdate}
                     show={showUpdateModal}
                     setShow={setShowUpdateModal}
-                    fetchListProduct={fetchlistProduct}
+                    fetchListProduct={fetchlistProductWithPaginate}
 
                 />
                 <ViewProduct
@@ -93,7 +118,7 @@ const ManageProduct = (props) => {
                     dataDelete={dataDelete}
                     show={showDeleteModal}
                     setShow={setShowDeleteModal}
-                    fetchListProduct={fetchlistProduct}
+                    fetchListProduct={fetchlistProductWithPaginate}
                 />
             </div>
 

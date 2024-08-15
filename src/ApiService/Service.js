@@ -1,6 +1,6 @@
 import axios from "../utils/axiosCustomize";
 
-var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjM2NjQzNjUsImlhdCI6MTcyMzYyODM2NSwianRpIjoiODUwMmRkZDEtMGI5OS00YmQ5LTkyMDAtNmU5ZjY0ZGNhMDA1Iiwic2NvcGUiOiJST0xFX0FETUlOIn0.H-IVNNRSQz63HHbfN2DIn_BtmxZAnEkcr_mj8lQ6tGqhhPUhUZvjcABHqcox8Cy5BWJ4wMxCMeHvYgGmX0Ip_w";
+var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjM3NTQ3MjgsImlhdCI6MTcyMzcxODcyOCwianRpIjoiZDU1MjlhMTMtNTU3MC00NDRjLTlkMWYtZmRlMTgwMmYyOGExIiwic2NvcGUiOiJST0xFX0FETUlOIn0.wg9BlNFN6wphR5IgrlAqSGmCjFTBPAbeVlPDPK6YmtIbe8G3v0DX86tJ8wbZo8e460gYgkHNMPu91RJgR9WhcQ";
 const config = {
     headers: {
         "Authorization": `Bearer ${token}`,
@@ -94,11 +94,16 @@ const DeleteProductApi = (productId) => {
 
     return axios.delete('products/' + productId, config);
 }
+const GetProductWithPaginate = (pageNo, PageSize) => {
+
+    return axios.get(`products?pageNo=${pageNo}&pageSize=${PageSize}`);
+}
 export {
     GetAllProduct,
     UpdateProductApi,
     DeleteProductApi,
     CreateNewProduct,
+    GetProductWithPaginate,
 
     CheckExistedUsername,
     UpdateUserApi,

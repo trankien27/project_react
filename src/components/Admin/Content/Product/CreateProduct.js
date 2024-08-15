@@ -49,7 +49,7 @@ function ProductModal(props) {
             await CreateNewProduct(nameProduct, descriptionProduct, imgProduct, quantityProduct, priceProduct);
             toast.success("Thêm sản phẩm thành công")
             handleClose();
-            await props.fetchListProduct();
+            await props.fetchListProduct(0);
         } catch (error) {
             toast.error("bạn nhập thông tin chưa đúng")
             console.log(error);
