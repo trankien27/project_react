@@ -7,13 +7,14 @@ import store from './redux/store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import User from './components/user/User';
-import Login from './components/login/Login';
+
 import HomePage from './components/home/HomePage';
 import Admin from './components/Admin/Admin';
 import ManageUser from './components/Admin/Content/User/ManageUser';
 import ManageProduct from './components/Admin/Content/Product/ManageProduct';
 import Dashboard from './components/Admin/Content/Dashboard';
-import Register from './components/login/Register';
+import Login from './components/Auth/Login';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -27,8 +28,6 @@ root.render(
           <Route path='/' element={<App />} >
             <Route index element={<HomePage />} />
             <Route path='User' element={<User />} />
-            <Route path='login' element={<Login />} />
-            <Route path='register' element={<Register />} />
           </Route>
 
           <Route path='/admin' element={<Admin />} >
@@ -36,6 +35,7 @@ root.render(
             <Route path='manage-product' element={<ManageProduct />} />
             <Route path='manage-user' element={<ManageUser />} />
           </Route>
+          <Route path="/login" element={<Login />} />
           {/* <Route path='/admin' element={<Admin />}>
             <Route index element={<Dashboard />} />
             <Route path='manage-user' element={<ManageUser />} />

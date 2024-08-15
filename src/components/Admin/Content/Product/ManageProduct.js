@@ -15,7 +15,6 @@ const ManageProduct = (props) => {
     const [PageNo, setPageNo] = useState(1);
     const LIMIT_USER = 5;
     const [listProduct, setListProduct] = useState([]);
-    const [totalPage, setTotalPage] = useState();
 
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);

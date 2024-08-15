@@ -23,6 +23,7 @@ const ManageUser = (props) => {
     const fetchUser = async () => {
         let res = await GetAllUser();
         setListUser(res.result)
+        // console.log(res.result[1].roles[0].name)
     }
 
     useEffect(() => {
