@@ -7,6 +7,17 @@ const config = {
     }
 };
 
+
+//0 login
+const PostLogin = (username, password) => {
+    const formdata = new FormData();
+    formdata.append('username', username);
+    formdata.append('password', password);
+
+    let data = Object.fromEntries(formdata.entries());
+
+    return axios.post('auth/token', data);
+}
 //1.User
 //1.1.api get all user
 const GetAllUser = () => {
@@ -99,6 +110,8 @@ const GetProductWithPaginate = (pageNo, PageSize) => {
     return axios.get(`products?pageNo=${pageNo}&pageSize=${PageSize}`);
 }
 export {
+    PostLogin,
+
     GetAllProduct,
     UpdateProductApi,
     DeleteProductApi,
