@@ -3,7 +3,9 @@ import "./Login.scss"
 import { useNavigate } from "react-router-dom";
 import { PostLogin } from "../../ApiService/Service";
 import { toast, ToastContainer } from "react-toastify";
+import { VscEye, VscEyeClosed } from "react-icons/vsc";
 const Login = () => {
+    const [isShowPass, setIsShowPass] = useState(false);
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const navigate = useNavigate();
@@ -16,7 +18,7 @@ const Login = () => {
             if (res.result.role[0].name == "ADMIN") {
                 navigate('/admin');
             } else {
-                navigate('/user')
+                navigate('/')
             }
         }).catch((error) => {
 
@@ -34,7 +36,7 @@ const Login = () => {
                 <span>
                     Bạn chưa có tài khoản?
                 </span>
-                <button>
+                <button onClick={() => { navigate("/register") }}>
                     Đăng ký
                 </button>
             </div>
@@ -56,11 +58,20 @@ const Login = () => {
                     ></input>
                     <label>Mật khẩu</label>
                     <input
-                        type="password"
+                        type={isShowPass ? "text" : "password"}
                         className="form-control"
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
                     ></input>
+                    {isShowPass ?
+                        <span className="icons-eye" onClick={() => setIsShowPass(false)}>
+                            <VscEye />
+                        </span>
+                        :
+                        <span className="icons-eye" onClick={() => setIsShowPass(true)}>
+                            <VscEyeClosed />
+                        </span>
+                    }
                     <span className="forgot-password">Quên mật khẩu?</span>
                     <div>
                         <button className="btn-login"
@@ -73,20 +84,7 @@ const Login = () => {
 
                 </div>
             </div>
-            <ToastContainer
-                position="top-right"
-                autoClose={2000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
 
-            />
-            {/* Same as */}
-            <ToastContainer />
         </div>
     )
 

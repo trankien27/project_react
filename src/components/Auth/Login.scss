@@ -35,9 +35,20 @@
     }
 
     .content-form {
+        span.icons-eye {
+            float: right;
+            margin-left: -25px;
+            margin-top: -25px;
+            position: relative;
+            bottom: 21px;
+            right: 5px;
+            z-index: 2;
+        }
+
         input {
             margin-bottom: 15px;
             margin-top: 4px;
+
         }
 
         button {

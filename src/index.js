@@ -14,6 +14,8 @@ import ManageUser from './components/Admin/Content/User/ManageUser';
 import ManageProduct from './components/Admin/Content/Product/ManageProduct';
 import Dashboard from './components/Admin/Content/Dashboard';
 import Login from './components/Auth/Login';
+import { ToastContainer } from 'react-toastify';
+import Register from './components/Auth/Register';
 
 
 
@@ -36,14 +38,24 @@ root.render(
             <Route path='manage-user' element={<ManageUser />} />
           </Route>
           <Route path="/login" element={<Login />} />
-          {/* <Route path='/admin' element={<Admin />}>
-            <Route index element={<Dashboard />} />
-            <Route path='manage-user' element={<ManageUser />} />
-            <Route path='manage-product' element={<ManageProduct />} />
-          </Route> */}
+          <Route path="/register" element={<Register />} />
+
         </Routes>
       </BrowserRouter>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
 
+      />
+      {/* Same as */}
+      <ToastContainer />
     </React.StrictMode>
   </Provider>
 );
