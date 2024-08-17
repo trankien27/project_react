@@ -1,10 +1,13 @@
 import axios from "../utils/axiosCustomize";
+var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjM5MzE3NzYsImlhdCI6MTcyMzg5NTc3NiwianRpIjoiMDQ2NzhkZDQtYzE0My00MzU5LWIwYjUtZDU3MGIxYjQ5ZTRmIiwic2NvcGUiOiJST0xFX0FETUlOIn0.ywxvKgxTFrHCByketDpxMaPsRJ367dPBq6XO0tTiRUM-G6EeqCBlYmontkLCnQArYNVTytJINOYKY1KBtXK-gw"
 
-var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjM4MzE1MDEsImlhdCI6MTcyMzc5NTUwMSwianRpIjoiNWUyYmQ4NWUtZmUzMS00NzBiLWEzOGUtZmE1NzdmM2UzMzA1Iiwic2NvcGUiOiJST0xFX0FETUlOIn0.bO-sUAf2RX77Dd3DNPltiAiTPy_6RfYqky2t-7k-tWRgQcr59Urqa1z50u3oovHtMSZ8APrb_LSWzXL6Yt51jg";
 const config = {
+
     headers: {
         "Authorization": `Bearer ${token}`,
     }
+
+
 };
 
 
@@ -20,7 +23,7 @@ const PostLogin = (username, password) => {
 }
 //1.User
 //1.1.api get all user
-const GetAllUser = () => {
+const GetAllUser = (token) => {
     return axios.get('users', config)
 
 }
@@ -41,7 +44,7 @@ const CreateNewUser = (username, firstname, lastname, email, dob, password) => {
 }
 
 //1.3 update user
-const UpdateUserApi = (userID, username, firstname, lastname, email, dob, password) => {
+const UpdateUserApi = (userID, username, firstname, lastname, email, dob, password, token) => {
 
     const formdata = new FormData();
     formdata.append('username', username);

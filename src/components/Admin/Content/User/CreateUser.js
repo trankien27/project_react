@@ -15,13 +15,13 @@ const UserModal = (props) => {
     const [dob, setDob] = useState("");
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
-    const [token, setToken] = useState("");
+
 
     const handleClose = () => {
 
         setShow(false);
         setEmail("");
-        setDob("");
+        setDob();
         setFirstname("");
         setLastname("");
         setPassword("");
@@ -38,7 +38,7 @@ const UserModal = (props) => {
 
 
     const handleSubmit = async () => {
-
+        console.log(typeof dob)
         //validate age
         var nowDate = new Date();
         const birthDate = parseISO(dob);

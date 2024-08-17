@@ -9,21 +9,25 @@ import UpdaetUserModal from './UpdateUser';
 import ViewUser from './ViewUser';
 import { constant } from 'lodash';
 import DeleteUser from './DeleteUser';
+import { useSelector } from 'react-redux';
 
 
 
 
 const ManageUser = (props) => {
+    // const account = useSelector(state => state.user.account);
+    // const token = account.token
     const [listUser, setListUser] = useState([]);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showViewModal, setShowViewModal] = useState(false);
     const [dataUpdate, setDataUpdate] = useState();
     const [dataDelete, setDataDelete] = useState();
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+
     const fetchUser = async () => {
         let res = await GetAllUser();
         setListUser(res.result)
-        // console.log(res.result[1].roles[0].name)
+
     }
 
     useEffect(() => {
@@ -32,6 +36,7 @@ const ManageUser = (props) => {
 
     //function update
     const hanldeUpdateUser = (user) => {
+        console.log(dataUpdate);
         setDataUpdate(user);
         setShowUpdateModal(true);
     }

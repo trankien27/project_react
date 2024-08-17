@@ -16,6 +16,7 @@ import Dashboard from './components/Admin/Content/Dashboard';
 import Login from './components/Auth/Login';
 import { ToastContainer } from 'react-toastify';
 import Register from './components/Auth/Register';
+import Service from './ApiService/Service';
 
 
 
@@ -56,6 +57,7 @@ root.render(
       />
       {/* Same as */}
       <ToastContainer />
+
     </React.StrictMode>
   </Provider>
 );

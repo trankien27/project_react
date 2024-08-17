@@ -18,10 +18,10 @@ const UpdaetUserModal = (props) => {
 
 
     useEffect(() => {
-        console.log(dataUpdate)
+        console.log(typeof Date.parse(dataUpdate.dob))
         if (!_.isEmpty(dataUpdate)) {
             setEmail(dataUpdate.email);
-            // setDob(dataUpdate.dob);
+            setDob(dataUpdate.dob);
             setFirstname(dataUpdate.firstname);
             setLastname(dataUpdate.lastname);
             setPassword(dataUpdate.password);
@@ -37,7 +37,7 @@ const UpdaetUserModal = (props) => {
 
         setShow(false);
         setEmail("");
-        setDob("");
+        setDob();
         setFirstname("");
         setLastname("");
         setPassword("");
