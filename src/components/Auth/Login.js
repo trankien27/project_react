@@ -5,7 +5,7 @@ import { PostLogin } from "../../ApiService/Service";
 import { toast, ToastContainer } from "react-toastify";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
-import { doLogin } from "../../redux/action/userAction";
+import { doLogin, FETCH_LOGIN } from "../../redux/action/userAction";
 const Login = () => {
     const [isShowPass, setIsShowPass] = useState(false);
     const [username, setUsername] = useState();
@@ -15,9 +15,14 @@ const Login = () => {
 
     const hanldeLogin = async (username, password) => {
         await PostLogin(username, password).then((res) => {
+            console.log(res)
+            dispatch({
+                type: FETCH_LOGIN,
+                payload: res
 
-            dispatch(doLogin(res))
+            })
             if (res.result.roles[0].name == "ADMIN") {
+
                 toast.success('Đăng nhập thành công!');
                 navigate('/admin');
             } else {
