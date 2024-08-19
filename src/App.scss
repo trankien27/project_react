@@ -72,6 +72,7 @@ video {
   border: 1px solid #535353;
   background-color: #303030;
 
+
   a {
     color: white;
   }
@@ -148,4 +149,9 @@ video {
 
     }
   }
+}
+
+a#setting-nav-bar {
+  margin-right: -87px;
+  padding: 8px 16px;
 }

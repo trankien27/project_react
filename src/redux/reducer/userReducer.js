@@ -1,4 +1,5 @@
 
+
 import { INCREMENT, DECREMENT } from '../action/counterAction';
 import { FETCH_LOGIN } from '../action/userAction';
 const INITIAL_STATE = {
@@ -6,11 +7,13 @@ const INITIAL_STATE = {
         username: "",
         token: "",
         roles: ""
+
     },
     isAuthenticated: false
 };
 const userReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
+
         case FETCH_LOGIN:
             return {
                 ...state, account: {
@@ -25,8 +28,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state, count: state.count - 1,
             };
-        default: return state;
-    }
-};
+
+    };
+}
 
 export default userReducer;
