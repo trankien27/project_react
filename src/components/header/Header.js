@@ -15,9 +15,6 @@ const Header = () => {
     const handleLogin = () => {
         navigate("/login")
     }
-    const account = useSelector(state => state.user.account);
-    const isAuthenticated = useSelector(state => state.user.isAuthenticated);
-    console.log(isAuthenticated);
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
@@ -26,19 +23,36 @@ const Header = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <NavLink to="/" className="nav-link">Home</NavLink>
-                        <NavDropdown title="Quản lý" id="basic-nav-dropdown">
-                            <NavDropdown.Item>
-                                <NavLink to="/User">Người dùng</NavLink>
-                            </NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item>
-                                <NavLink to="/Admin">Admin</NavLink></NavDropdown.Item>
-                        </NavDropdown>
+
+                        {account.roles === "ADMIN" ?
+                            <NavDropdown title="Quản lý" id="basic-nav-dropdown">
+                                <NavDropdown.Item>
+                                    <NavLink to="/User">Người dùng</NavLink>
+                                </NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item>
+                                    <NavLink to="/Admin">Admin</NavLink></NavDropdown.Item>
+                            </NavDropdown> :
+                            ""
+                        }
+
                     </Nav>
-                    <Nav>
-                        <button className='btn-login' onClick={() => handleLogin()}>Login</button>
-                        <button className='btn-signup'><NavLink to='/register'>Sign up</NavLink></button>
-                    </Nav>
+                    {
+                        !isAuthenticated ?
+                            <Nav>
+                                <button className='btn-login' onClick={() => handleLogin()}>Login</button>
+                                <button className='btn-signup'><NavLink to='/register'>Sign up</NavLink></button>
+                            </Nav>
+                            : <NavDropdown title="Cài đặt" id="basic-nav-dropdown">
+                                <NavDropdown.Item>
+                                    <NavLink to="/User">Thông tin</NavLink>
+                                </NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item>
+                                    <NavLink to="/login">Đăng xuất</NavLink></NavDropdown.Item>
+                            </NavDropdown>
+                    }
+
                 </Navbar.Collapse>
             </Container>
         </Navbar>
