@@ -2,10 +2,10 @@ import ReactPaginate from "react-paginate"
 import { useState, useEffect } from "react";
 
 const TableProductPaginate = (props) => {
-    const { listProduct } = props
+    const { listProduct } = props;
 
-
-
+    const { countPage } = props;
+    console.log(countPage);
     return (
         <>
             <table className="table table-hover table-bordered">
@@ -56,7 +56,7 @@ const TableProductPaginate = (props) => {
                 onPageChange={(event) => props.handlePageClick(event.selected)}
                 pageRangeDisplayed={3}
                 marginPagesDisplayed={2}
-                pageCount={10}
+                pageCount={countPage}
                 previousLabel="< previous"
                 pageClassName="page-item"
                 pageLinkClassName="page-link"

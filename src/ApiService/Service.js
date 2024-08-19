@@ -1,6 +1,6 @@
 import axios from "../utils/axiosCustomize";
 
-var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjM4MzE1MDEsImlhdCI6MTcyMzc5NTUwMSwianRpIjoiNWUyYmQ4NWUtZmUzMS00NzBiLWEzOGUtZmE1NzdmM2UzMzA1Iiwic2NvcGUiOiJST0xFX0FETUlOIn0.bO-sUAf2RX77Dd3DNPltiAiTPy_6RfYqky2t-7k-tWRgQcr59Urqa1z50u3oovHtMSZ8APrb_LSWzXL6Yt51jg";
+var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjQwNzEyMDYsImlhdCI6MTcyNDAzNTIwNiwianRpIjoiMGIyN2I2ZjQtNjdlYS00ZDU0LWE3NjctZDVhMGMyNmYwZjljIiwic2NvcGUiOiJST0xFX0FETUlOIn0.evjufi8ZyTxQ0pdmYs0EVJHCz_wJLCIkmDcYAonB2CZCsocevjMnyBAFdBWLI1YTOmFXqCUUgDZhvCZLoUmfbA";
 const config = {
     headers: {
         "Authorization": `Bearer ${token}`,

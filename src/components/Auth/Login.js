@@ -4,25 +4,28 @@ import { useNavigate } from "react-router-dom";
 import { PostLogin } from "../../ApiService/Service";
 import { toast, ToastContainer } from "react-toastify";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
+import { useDispatch } from "react-redux";
+import { doLogin } from "../../redux/action/userAction";
 const Login = () => {
     const [isShowPass, setIsShowPass] = useState(false);
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const hanldeLogin = async (username, password) => {
         await PostLogin(username, password).then((res) => {
 
-
-            toast.success('Đăng nhập thành công!');
-            if (res.result.role[0].name == "ADMIN") {
+            dispatch(doLogin(res))
+            if (res.result.roles[0].name == "ADMIN") {
+                toast.success('Đăng nhập thành công!');
                 navigate('/admin');
             } else {
                 navigate('/')
             }
         }).catch((error) => {
 
-            toast.error("Sai tài khoản hoặc mật khẩu");
+            toast.error("Lỗi");
 
         })
 

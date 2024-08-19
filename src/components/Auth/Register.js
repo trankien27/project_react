@@ -31,7 +31,7 @@ const Register = () => {
         }
 
         try {
-            console.log(password)
+
             let res = await CreateNewUser(username, firstname, lastname, email, dob, password);
             console.log(res.result);
             toast.success("Đăng ký thành công!")

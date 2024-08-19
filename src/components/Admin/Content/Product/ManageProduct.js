@@ -23,6 +23,7 @@ const ManageProduct = (props) => {
     const [dataUpdate, setDataUpdate] = useState();
     const [showModal, setShowModal] = useState(false);
     const [dataDelete, setDataDelete] = useState();
+    const [countPage, setCountPage] = useState(0);
 
     const countPageTotal = async () => {
         let res = await GetAllProduct();
@@ -37,6 +38,8 @@ const ManageProduct = (props) => {
 
         let res = await GetProductWithPaginate(page, LIMIT_USER);
         setListProduct(res.result);
+        setCountPage(Math.round(+res.quantity / LIMIT_USER));
+
 
     }
 
@@ -88,6 +91,7 @@ const ManageProduct = (props) => {
                 <div className='table-products'>
 
                     <TableProductPaginate
+                        countPage={countPage}
                         handlePageClick={handlePageClick}
                         listProduct={listProduct}
                         handleUpdateProduct={handleUpdateProduct}
