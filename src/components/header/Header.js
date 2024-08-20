@@ -10,10 +10,16 @@ const Header = () => {
     const account = useSelector(state => state.user.account);
     console.log(account)
     const isAuthenticated = useSelector(state => state.user.isAuthenticated);
-    console.log(isAuthenticated)
+
+    // localStorage.setItem("JWT", account.token);
+    // console.log(localStorage.getItem("JWT"));
     const navigate = useNavigate()
     const handleLogin = () => {
         navigate("/login")
+    }
+    const handleLogOut = () => {
+        localStorage.removeItem('JWT');
+        navigate('/login')
     }
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
@@ -49,7 +55,7 @@ const Header = () => {
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item>
-                                    <NavLink to="/login">Đăng xuất</NavLink></NavDropdown.Item>
+                                    <a onClick={() => handleLogOut()}>Đăng xuất</a></NavDropdown.Item>
                             </NavDropdown>
                     }
 

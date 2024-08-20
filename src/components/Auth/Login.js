@@ -6,30 +6,31 @@ import { toast, ToastContainer } from "react-toastify";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import { doLogin, FETCH_LOGIN } from "../../redux/action/userAction";
+import { CgSpinner } from "react-icons/cg";
 const Login = () => {
     const [isShowPass, setIsShowPass] = useState(false);
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    const [loading, setLoading] = useState(false)
     const hanldeLogin = async (username, password) => {
+        setLoading(true)
         await PostLogin(username, password).then((res) => {
             console.log(res)
-            dispatch({
-                type: FETCH_LOGIN,
-                payload: res
-
-            })
+            dispatch(doLogin(res))
+            localStorage.setItem('JWT', res.result.token)
             if (res.result.roles[0].name == "ADMIN") {
 
                 toast.success('Đăng nhập thành công!');
+                setLoading(false);
                 navigate('/admin');
             } else {
+                setLoading(false)
                 navigate('/')
             }
         }).catch((error) => {
-
+            setLoading(false)
             toast.error("Lỗi");
 
         })
@@ -84,7 +85,12 @@ const Login = () => {
                     <div>
                         <button className="btn-login"
                             onClick={() => hanldeLogin(username, password)}
-                        >Đăng nhập</button>
+                            disabled={loading}
+                        >
+                            {loading &&
+                                <CgSpinner className="loaderIcon" />}
+                            <span>Đăng nhập
+                            </span></button>
                     </div>
                     <div className="text-center">
                         <span onClick={() => { navigate("/") }}>&#60;&#60;Trở về trang chủ</span>

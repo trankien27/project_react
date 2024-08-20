@@ -5,6 +5,7 @@ import { DeleteProductApi, DeleteUserApi } from '../../../../ApiService/Service'
 import { toast } from 'react-toastify';
 
 const DeleteUser = (props) => {
+    const { token } = props;
     const { show, setShow } = props;
     const { dataDelete } = props;
 

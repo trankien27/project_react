@@ -1,11 +1,15 @@
 import axios from "../utils/axiosCustomize";
-var token = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJraWVuIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjM5MzE3NzYsImlhdCI6MTcyMzg5NTc3NiwianRpIjoiMDQ2NzhkZDQtYzE0My00MzU5LWIwYjUtZDU3MGIxYjQ5ZTRmIiwic2NvcGUiOiJST0xFX0FETUlOIn0.ywxvKgxTFrHCByketDpxMaPsRJ367dPBq6XO0tTiRUM-G6EeqCBlYmontkLCnQArYNVTytJINOYKY1KBtXK-gw"
+localStorage.getItem('JWT')
+console.log(localStorage.getItem('JWT'))
+var token = localStorage.getItem('JWT')
 const config = {
+
 
     headers: {
         "Authorization": `Bearer ${token}`,
-    }
 
+
+    }
 
 };
 
@@ -16,13 +20,14 @@ const PostLogin = (username, password) => {
     formdata.append('username', username);
     formdata.append('password', password);
 
+
     let data = Object.fromEntries(formdata.entries());
 
     return axios.post('auth/token', data);
 }
 //1.User
 //1.1.api get all user
-const GetAllUser = (token) => {
+const GetAllUser = () => {
     return axios.get('users', config)
 
 }
@@ -43,7 +48,7 @@ const CreateNewUser = (username, firstname, lastname, email, dob, password) => {
 }
 
 //1.3 update user
-const UpdateUserApi = (userID, username, firstname, lastname, email, dob, password, token) => {
+const UpdateUserApi = (userID, username, firstname, lastname, email, dob, password) => {
 
     const formdata = new FormData();
     formdata.append('username', username);

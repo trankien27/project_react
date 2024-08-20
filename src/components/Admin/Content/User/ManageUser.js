@@ -7,7 +7,7 @@ import { useEffect } from "react"
 import { GetAllUser } from "../../../../ApiService/Service";
 import UpdaetUserModal from './UpdateUser';
 import ViewUser from './ViewUser';
-import { constant } from 'lodash';
+
 import DeleteUser from './DeleteUser';
 import { useSelector } from 'react-redux';
 
@@ -15,8 +15,7 @@ import { useSelector } from 'react-redux';
 
 
 const ManageUser = (props) => {
-    // const account = useSelector(state => state.user.account);
-    // const token = account.token
+
     const [listUser, setListUser] = useState([]);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showViewModal, setShowViewModal] = useState(false);
@@ -71,6 +70,7 @@ const ManageUser = (props) => {
 
                 </div>
                 <UpdaetUserModal
+
                     dataUpdate={dataUpdate}
                     show={showUpdateModal}
                     setShow={setShowUpdateModal}
@@ -79,6 +79,7 @@ const ManageUser = (props) => {
                 />
                 <div>
                     <TableUser
+
                         hanldeUpdateUser={hanldeUpdateUser}
                         handleViewUser={handleViewUser}
                         listUser={listUser}
@@ -89,12 +90,14 @@ const ManageUser = (props) => {
                 </div>
                 <div>
                     <ViewUser
+
                         dataUpdate={dataUpdate}
                         show={showViewModal}
                         setShow={setShowViewModal}
 
                     />
                     <DeleteUser
+
                         dataDelete={dataDelete}
                         show={showDeleteModal}
                         setShow={setShowDeleteModal}
