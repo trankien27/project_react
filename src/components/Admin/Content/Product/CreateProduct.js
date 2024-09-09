@@ -9,7 +9,7 @@ import { CreateNewProduct } from '../../../../ApiService/Service';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 
-function ProductModal(props) {
+const ProductModal = (props) => {
 
 
     const { show, setShow } = props;
@@ -36,14 +36,21 @@ function ProductModal(props) {
         setPreviewImg("");
     }
     const handleUpLoadImage = (event) => {
+        const data = new FileReader();
+        data.addEventListener('load', () => {
+            setImgProduct(data.result)
+        })
+        data.readAsDataURL(event.target.files[0])
+        console.log(imgProduct)
         if (event.target && event.target.files && event.target.files[0]) {
             setPreviewImg(URL.createObjectURL(event.target.files[0]));
-            setImgProduct(URL.createObjectURL(event.target.files[0]))
         } else {
             // setPreviewImg("");
         }
 
     }
+
+
     const handleSubmitCreateProduct = async () => {
         try {
             await CreateNewProduct(nameProduct, descriptionProduct, imgProduct, quantityProduct, priceProduct);

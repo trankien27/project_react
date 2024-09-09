@@ -56,7 +56,7 @@ const TableProductPaginate = (props) => {
                 onPageChange={(event) => props.handlePageClick(event.selected)}
                 pageRangeDisplayed={3}
                 marginPagesDisplayed={2}
-                pageCount={countPage}
+                pageCount={countPage + 1}
                 previousLabel="< previous"
                 pageClassName="page-item"
                 pageLinkClassName="page-link"

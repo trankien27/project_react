@@ -12,7 +12,7 @@ import TableProductPaginate from './TableProductPaginate';
 
 
 const ManageProduct = (props) => {
-    const [PageNo, setPageNo] = useState(1);
+    const [PageNo, setPageNo] = useState(0);
     const LIMIT_USER = 5;
     const [listProduct, setListProduct] = useState([]);
 

@@ -5,32 +5,39 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { isEmpty } from 'lodash';
 
 const Header = () => {
     const account = useSelector(state => state.user.account);
-    console.log(account)
-    const isAuthenticated = useSelector(state => state.user.isAuthenticated);
+    console.log(account);
+    const [isAuthenticated, setIsAuthenticated] = useState(!isEmpty(localStorage.getItem("JWT")))
+    // const isAuthenticated = useSelector(state => state.user.isAuthenticated);
 
     // localStorage.setItem("JWT", account.token);
     // console.log(localStorage.getItem("JWT"));
     const navigate = useNavigate()
     const handleLogin = () => {
-        navigate("/login")
+        navigate("/login");
+
     }
     const handleLogOut = () => {
         localStorage.removeItem('JWT');
-        navigate('/login')
+        setIsAuthenticated(false);
+        navigate('/')
     }
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
                 <NavLink to="/" className="navbar-brand">KShop</NavLink>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Collapse id="basic-navbar-nav" >
                     <Nav className="me-auto">
-                        <NavLink to="/" className="nav-link">Home</NavLink>
 
-                        {account.roles === "ADMIN" ?
+                        <NavLink to="/product" className="nav-link">Home</NavLink>
+
+
+                        {isAuthenticated ?
                             <NavDropdown title="Quản lý" id="basic-nav-dropdown">
                                 <NavDropdown.Item>
                                     <NavLink to="/User">Người dùng</NavLink>

@@ -17,9 +17,10 @@ const Login = () => {
     const hanldeLogin = async (username, password) => {
         setLoading(true)
         await PostLogin(username, password).then((res) => {
+            localStorage.setItem('JWT', res.result.token)
             console.log(res)
             dispatch(doLogin(res))
-            localStorage.setItem('JWT', res.result.token)
+
             if (res.result.roles[0].name == "ADMIN") {
 
                 toast.success('Đăng nhập thành công!');

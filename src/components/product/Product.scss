@@ -1,0 +1,15 @@
+.product-section {
+    margin: 50px;
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+
+
+    .product-show {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        margin-left: 3rem;
+        flex-wrap: wrap;
+    }
+}
