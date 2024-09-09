@@ -2,7 +2,9 @@ import ProductCard from "./ProductCard";
 import './Product.scss';
 import { GetAllProduct } from "../../ApiService/Service";
 import { useEffect, useState } from "react";
+import OrderModal from "./Order";
 const Product = (props) => {
+    const [showModal, setShowModal] = useState(false);
     const [products, setProducts] = useState();
     const getProducts = async () => {
         let res = await GetAllProduct();
@@ -13,22 +15,10 @@ const Product = (props) => {
     useEffect(() => {
         console.log(products)
         getProducts();
+
     }, [])
 
-    // const products = [
-    //     {
-    //         brand: "kien",
-    //         description: "des",
-    //         image: "https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/2.jpg",
-    //         formattedPrice: 1000
-    //     },
-    //     {
-    //         brand: "kien2",
-    //         description: "des",
-    //         image: "https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/2.jpg",
-    //         formattedPrice: 1000
-    //     }
-    // ]
+
 
     return (
 
@@ -47,7 +37,9 @@ const Product = (props) => {
                     <td>Danh sách sp trống</td>
                 }
             </div>
-
+            <OrderModal
+                show={showModal}
+            />
 
         </div>
     )

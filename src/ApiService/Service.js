@@ -1,4 +1,5 @@
 import axios from "../utils/axiosCustomize";
+import axiosDefault from "../utils/axiosDefault";
 localStorage.getItem('JWT')
 console.log(localStorage.getItem('JWT'))
 var token = localStorage.getItem('JWT')
@@ -116,6 +117,9 @@ const GetProductWithPaginate = (pageNo, PageSize) => {
 
     return axios.get(`products?pageNo=${pageNo}&pageSize=${PageSize}`);
 }
+const GetAllProvice = () => {
+    return axiosDefault.get('https://provinces.open-api.vn/api/?depth=3')
+}
 export {
     PostLogin,
 
@@ -129,5 +133,7 @@ export {
     UpdateUserApi,
     GetAllUser,
     CreateNewUser,
-    DeleteUserApi
+    DeleteUserApi,
+
+    GetAllProvice
 }

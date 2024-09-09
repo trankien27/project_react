@@ -37,7 +37,7 @@ const Header = () => {
                         <NavLink to="/product" className="nav-link">Home</NavLink>
 
 
-                        {isAuthenticated ?
+                        {isAuthenticated && account.roles === "ADMIN" ?
                             <NavDropdown title="Quản lý" id="basic-nav-dropdown">
                                 <NavDropdown.Item>
                                     <NavLink to="/User">Người dùng</NavLink>
