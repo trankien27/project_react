@@ -1,27 +1,84 @@
 import { Modal } from "react-bootstrap"
 import './Order.scss'
-import { GetAllProvice } from "../../ApiService/Service";
+import { GetAllDistrict, GetAllProvice, GetProvince, Order } from "../../ApiService/Service";
 import { useEffect, useState } from "react";
-import SelectionAdress from "./SelectionAdress";
+import { toast } from "react-toastify";
+
 const OrderModal = (props) => {
-    const showModal = props;
+    const formatter = new Intl.NumberFormat();
     const [listProvince, setListProvince] = useState();
+    const [districts, setDistricts] = useState();
+    const [selection, setSelection] = useState(1);
+    const { show, setShow } = props;
+    const { product } = props;
+
+
+    const [fullname, setFullname] = useState();
+    const [numberPhone, setNumberPhone] = useState();
+    const [payment, setPayment] = useState("Thanh toán khi nhận hàng");
+    const [email, setEmail] = useState();
+    const [province, setProvince] = useState();
+    const [district, setDistrict] = useState("Quận Ba Đình");
+    const [note, setNote] = useState();
+    const [quantityProduct, setQuantityProduct] = useState(1);
+
+
+
+    const handleClose = () => {
+        setShow(false);
+    }
+    const handleDecrese = () => {
+        setQuantityProduct(quantityProduct - 1)
+    }
     const fetchProvince = async () => {
         let res = await GetAllProvice();
         setListProvince(res.data)
-        console.log(res);
+
     }
+
+    const findProvince = async () => {
+        let res = await GetProvince(selection);
+        setProvince(res.data.name);
+        console.log(province);
+    }
+    findProvince();
+    const handleSubmit = async () => {
+        try {
+            let res = await Order(product.productName, fullname, numberPhone, payment, email, quantityProduct, district, province, note)
+            console.log(res);
+            toast.success("Đặt hàng thành công")
+            handleClose();
+        } catch (e) {
+            toast.error("Đã xảy ra lỗi")
+            console.log(e)
+        }
+
+
+
+    }
+
+
+    const fetchDistricts = async () => {
+        let res = await GetAllDistrict(selection);
+        setDistricts(res.data.districts);
+
+
+    }
+
     useEffect(() => {
+
         fetchProvince();
-    }, [])
+        fetchDistricts();
+    }, [selection])
+
     return (
         <>
 
 
             <Modal className='modal-buy'
-                show={showModal}
+                show={show}
                 size="xl"
-
+                onHide={handleClose}
                 backdrop='static'
             >
                 <Modal.Header closeButton>
@@ -30,63 +87,77 @@ const OrderModal = (props) => {
                 <Modal.Body><form className="body">
 
                     <div className="image-product">
-                        <img src="https://cdn-images.vtv.vn/2019/10/10/photo-1-1570646414965538138380.jpg" />
-                        <p>Iphone</p>
-                        <p>9,9999999 Đ</p>
+
+                        <img src={product?.productImage} />
+                        <p className="name"><span>Tên sản phẩm:</span>{product?.productName}</p>
+                        <p className="price"><span>Giá :</span>{formatter.format(product?.productPrice)}</p>
                     </div>
 
                     <div className="input-info">
                         <label>Số lượng</label>
                         <div className="control">
-                            <button type="button" id="btnMinutes" fdprocessedid="w9ovnv">-</button>
-                            <input id="Number" name="Number" type="text" value="1" />
-                            <button type="button" id="btnPlus" fdprocessedid="ui0nch">+</button>
+                            <button disabled={quantityProduct <= 1} type="button" onClick={() => handleDecrese()}>-</button>
+                            <input id="Number" name="Number" type="text" disabled value={quantityProduct} onChange={(event) => setQuantityProduct(event.target.value)} />
+                            <button type="button" id="btnPlus" fdprocessedid="ui0nch" onClick={() => setQuantityProduct(quantityProduct + 1)}>+</button>
                         </div>
                         <label>Họ tên</label>
-                        <input id="hoten" name="hoten" type="text" placeholder="Họ và tên" />
+                        <input value={fullname} onChange={(e) => setFullname(e.target.value)} id="hoten" name="hoten" type="text" placeholder="Họ và tên" />
 
 
                         <label>Số điện thoại</label>
-                        <input id="sdt" name="sdt" type="text" placeholder="Số điện thoại" />
+                        <input value={numberPhone} onChange={(e) => setNumberPhone(e.target.value)} id="sdt" name="sdt" type="text" placeholder="Số điện thoại" />
 
 
                         <label>Email</label>
-                        <input id="email" name="email" type="email" placeholder="Email" />
+                        <input value={email} onChange={(e) => setEmail(e.target.value)} id="email" name="email" type="email" placeholder="Email" />
                         <label>Hình thức thanh toán</label>
-                        <select className="selection">
+                        <select value={payment} onChange={(e) => setPayment(e.target.value)} className="selection">
 
-                            <option value="1">Thanh toán khi nhận hàng</option>
-                            <option value="2">Thanh toán VNPAY</option>
+                            <option >Thanh toán khi nhận hàng</option>
+                            <option >Thanh toán VNPAY</option>
 
 
                         </select>
-                        <SelectionAdress />
+
                         <label>Địa chỉ</label>
                         <div className="address-input">
 
 
-                            <select className="selection">
-                                {listProvince && listProvince.map((province, index) => {
+                            <select value={province} placeholder="Tỉnh / Thành phố" className="selection" onChange={(e) => {
+                                setProvince()
+                                setSelection(e.target.value)
+                            }}>
+                                {listProvince?.map((province) => {
                                     return (
-                                        <option value="1">{province.name}</option>
+                                        <option value={province?.code}>{province?.name}</option>
                                     )
 
                                 })}
                             </select>
 
-                            <select className="selection">
-                                {listProvince && listProvince.map((province, index) => {
+                            <select value={districts} onChange={(e) => setDistrict(e.target.value)} className="selection" placeholder="Quận/Huyện">
+                                {districts?.map((district) => {
                                     return (
-                                        <option value="1">{province.name}</option>
+                                        <option value={district?.name}  >
+                                            {district?.name}</option>
                                     )
 
                                 })}
                             </select>
                         </div>
+                        <div className="note-area">
+                            <label>Địa chỉ cụ thể
+                            </label>
+                            <input value={note} onChange={(e) => setNote(e.target.value)} className="note" />
+                        </div>
                     </div>
 
                 </form></Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className="modal-footer">
+                    <div className="confirm-buy">
+                        <button className="btn btn-primary" onClick={() => handleSubmit()}>Tiến hành mua hàng </button>
+                    </div>
+
                 </Modal.Footer>
             </Modal>
         </>

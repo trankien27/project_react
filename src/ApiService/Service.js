@@ -118,7 +118,30 @@ const GetProductWithPaginate = (pageNo, PageSize) => {
     return axios.get(`products?pageNo=${pageNo}&pageSize=${PageSize}`);
 }
 const GetAllProvice = () => {
-    return axiosDefault.get('https://provinces.open-api.vn/api/?depth=3')
+    return axiosDefault.get('https://provinces.open-api.vn/api/?depth=2')
+}
+const GetProvince = (provinceCode) => {
+    return axiosDefault.get(`https://provinces.open-api.vn/api/p/${provinceCode}`)
+}
+const GetAllDistrict = (provinceCode) => {
+    return axiosDefault.get(`https://provinces.open-api.vn/api/p/${provinceCode}?depth=2`)
+}
+
+const Order = (productName, fullname, numberPhone, payment, email, quantityProduct, district, province, note
+) => {
+    const formdata = new FormData();
+    formdata.append('productName', productName);
+    formdata.append('fullname', fullname);
+    formdata.append('numberPhone', numberPhone);
+    formdata.append('payment', payment);
+    formdata.append('email', email);
+    formdata.append('quantityProduct', quantityProduct);
+    formdata.append('district', district);
+    formdata.append('province', province);
+    formdata.append('note', note);
+
+    let data = Object.fromEntries(formdata.entries());
+    return axios.post(`order`, data, config)
 }
 export {
     PostLogin,
@@ -134,6 +157,8 @@ export {
     GetAllUser,
     CreateNewUser,
     DeleteUserApi,
-
-    GetAllProvice
+    GetAllDistrict,
+    GetAllProvice,
+    GetProvince,
+    Order
 }

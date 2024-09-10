@@ -4,8 +4,11 @@ import { GetAllProduct } from "../../ApiService/Service";
 import { useEffect, useState } from "react";
 import OrderModal from "./Order";
 const Product = (props) => {
-    const [showModal, setShowModal] = useState(false);
+    const formatter = new Intl.NumberFormat();
     const [products, setProducts] = useState();
+    const [product, setProduct] = useState();
+
+
     const getProducts = async () => {
         let res = await GetAllProduct();
         console.log(res.result)
@@ -17,9 +20,13 @@ const Product = (props) => {
         getProducts();
 
     }, [])
+    const [show, setShow] = useState(false);
 
+    const handleBuy = (product) => {
+        setShow(true);
+        setProduct(product);
 
-
+    }
     return (
 
         <div className="product-section">
@@ -29,7 +36,14 @@ const Product = (props) => {
                     products && products.length > 0 &&
                     products.map((product, index) => {
                         return (
-                            <ProductCard product={product} />
+                            <a className="product-card">
+                                <img className="product-img" src={product.productImage} />
+                                <div className="contentBox">
+                                    <h3 className="product-name" >{product.productName}</h3>
+                                    <h2 className="price">{formatter.format(product.productPrice)}đ</h2>
+                                    <a onClick={() => handleBuy(product)} className="buy-btn">Mua ngay</a>
+                                </div>
+                            </a>
                         )
                     })
                 }
@@ -38,7 +52,9 @@ const Product = (props) => {
                 }
             </div>
             <OrderModal
-                show={showModal}
+                show={show}
+                product={product}
+                setShow={setShow}
             />
 
         </div>

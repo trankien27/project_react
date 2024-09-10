@@ -10,7 +10,7 @@ const ProductCard = (props) => {
       <div className="contentBox">
         <h3 className="product-name" >{product.productName}</h3>
         <h2 className="price">{product.productPrice}VND</h2>
-        <a href="#" class="buy-btn">Mua ngay</a>
+        <a onClick={() => props.handleBuy()} className="buy-btn">Mua ngay</a>
       </div>
     </a>
   );
